@@ -7,7 +7,7 @@ import Playlist from './Playlist';
 import CreatePlaylist from './createPlaylist';
 import Logout from './Logout';
 import SearchResult from './SearchResult';
-import { Router, Routes, Route } from 'react-router-dom';
+import {  Routes, Route } from 'react-router-dom';
 
 
 function App() { 

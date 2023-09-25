@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 function Home() {
   const [data,setData] = useState([]);
   const navigate = useNavigate();
-  const [cookie, setCookie] = useCookies(["user-id"]);
+  const [cookie] = useCookies(["user-id"]);
 
   useEffect(() => {
     const userid = cookie['user-id'];
