@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Melody-Mix/static/css/main.b32160d0.css",
+    "main.js": "/Melody-Mix/static/js/main.014b39ae.js",
+    "index.html": "/Melody-Mix/index.html",
+    "main.b32160d0.css.map": "/Melody-Mix/static/css/main.b32160d0.css.map",
+    "main.014b39ae.js.map": "/Melody-Mix/static/js/main.014b39ae.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b32160d0.css",
+    "static/js/main.014b39ae.js"
+  ]
+}
