@@ -1,0 +1,104 @@
+.NavBar{ 
+    height: 100px;
+    width: 100%;
+    background-color: #2A2A2A;
+    display: flex; 
+    justify-content: space-between;  
+    align-items: center;
+    z-index: 99999;
+}
+
+.links{
+    width: 250px;
+    height: 80px;
+}
+
+.first-portion{
+    display: flex;
+    justify-content: flex-start;
+    width: 300px;
+}
+
+.menu{
+    color: red !important;   
+    padding-left: 45px; 
+    z-index: 9999;
+    padding-top: 35px;
+    padding-left: 0px;
+}
+
+.unordered-list{
+    width: 250px;
+    height: 80px;
+    list-style: none;
+    display: flex;  
+    justify-content: space-around;      
+    align-items: center;
+}
+
+.list{
+    text-decoration: none;
+    color: Red;
+    font-family: 'Poppins';
+    font-size: 20px;
+}
+
+.sidebar {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: #333;
+    transition: left 0.3s ease-in-out;
+  }
+  
+  .sidebar.open {
+    left: 0;    
+    width: 225px;
+  }
+
+/* .favorite.notClicked{
+    color: white !important;
+}
+
+.favorite.clicked{
+    color: red !important;
+} */
+
+.logo{
+    width: 100px;
+    height: 100px;
+    padding-left: 30px;
+    color: red;    
+}
+
+.melody-mix{
+    color: red;
+    font-size: 25px;
+    padding-left: 30px;
+    padding-top: 30px;
+    font-family: 'Poppins', sans-serif;   
+}
+
+.searchBar{
+    width: 400px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-Bar{
+    width: 400px;
+    width: 400px;
+    height: 50px;
+    border-radius: 45px;
+    border: 5px solid red;
+    background-color: #2A2A2A;
+    color: white;
+}
+
+.searchicon{
+    color: red !important;
+}

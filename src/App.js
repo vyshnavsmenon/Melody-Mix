@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import Navbar from './Navbar';
+import Login from './Login.js';
+import Signup from './Signup';
+import About from './About';
+import Home from './Home';
+import Playlist from './Playlist';
+import CreatePlaylist from './createPlaylist';
+import Logout from './Logout';
+import SearchResult from './SearchResult';
+import { Router, Routes, Route } from 'react-router-dom';
 
-function App() {
+
+function App() { 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Navbar/> 
+          <Routes>
+            <Route path='/login' element={<Login/>}></Route>
+            <Route path='/signup' element={<Signup/>}></Route>
+            <Route path='/about' element={<About/>}></Route>                
+            <Route path='/' element={<Home/>}></Route>
+            <Route path='/playlist' element={<Playlist/>}></Route>
+            <Route path='/createplaylist' element={<CreatePlaylist/>}></Route>
+            <Route path='/logout' element={<Logout/>}></Route>
+            <Route path='/searchResult' element={<SearchResult  />}></Route>
+          </Routes>                   
+    </>
+  )
 }
 
 export default App;
+
+// echo "# Melody-Mix" >> README.md
+// git init
+// git add README.md
+// git commit -m "first commit"
+// git branch -M main
+// git remote add origin https://github.com/vyshnavsmenon/Melody-Mix.git
+// git push -u origin main
