@@ -1,6 +1,6 @@
 .menubar{
     width: 166px;
-    height: 585px;
+    height: 100vh;
     background-color: #2A2A2A;
     display: none;  
     color: white; 

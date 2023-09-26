@@ -102,3 +102,12 @@
 .searchicon{
     color: red !important;
 }
+
+
+@media (max-width: 768px){
+
+    .unordered-list{
+        display: none;
+    }
+
+}
