@@ -117,21 +117,21 @@
 
     .melody-mix{
         width: 40px;
-        padding-left: 45px;
+        padding-left: 30px;
     }
 
     .searchBar{
-        padding-left: 110px;
+        padding-left: 100px;
         /* width: 262px; */
     }
 
     .search-Bar{
-        width: 210px;
+        width: 190px;
     }
 
     img{
-        width: 65px;
-        padding-top: 20px;
+        width: 50px;
+        padding-top: 30px;
     }
 
 }
