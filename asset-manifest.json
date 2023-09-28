@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Melody-Mix/static/css/main.c3480bb9.css",
+    "main.css": "/Melody-Mix/static/css/main.bfac5989.css",
     "main.js": "/Melody-Mix/static/js/main.e82dd794.js",
     "index.html": "/Melody-Mix/index.html",
-    "main.c3480bb9.css.map": "/Melody-Mix/static/css/main.c3480bb9.css.map",
+    "main.bfac5989.css.map": "/Melody-Mix/static/css/main.bfac5989.css.map",
     "main.e82dd794.js.map": "/Melody-Mix/static/js/main.e82dd794.js.map"
   },
   "entrypoints": [
-    "static/css/main.c3480bb9.css",
+    "static/css/main.bfac5989.css",
     "static/js/main.e82dd794.js"
   ]
 }
