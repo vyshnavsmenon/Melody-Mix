@@ -116,12 +116,22 @@
     }
 
     .melody-mix{
-        width: 50px;
-        padding-left: 80px;
+        width: 40px;
+        padding-left: 45px;
     }
 
     .searchBar{
-        padding-left: 120px;
+        padding-left: 110px;
+        /* width: 262px; */
+    }
+
+    .search-Bar{
+        width: 210px;
+    }
+
+    img{
+        width: 65px;
+        padding-top: 20px;
     }
 
 }
