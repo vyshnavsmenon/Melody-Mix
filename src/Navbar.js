@@ -7,7 +7,6 @@ import './Menubar.css';
 import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
 import QueueMusicIcon from '@mui/icons-material/QueueMusic';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import UploadIcon from '@mui/icons-material/Upload';
 import MelodyMix from './MELODYMIX.png';
@@ -42,7 +41,7 @@ function Navbar() {
             <div className="first-portion">
                 <div className="menu" onClick={toggleSidebar}>{isOpen ? <CloseIcon/> : <MenuIcon/> }</div> 
                 <div className="logo"><img src={MelodyMix} alt="logo"/></div>   
-                <div className="melody-mix"><strong>MELODY <br /> MIX</strong></div>             
+                <div className="melody-mix"><p><strong>MELODY <br /> MIX</strong></p></div>             
             </div>                                        
             <div className="searchBar">
                 <input className="search-Bar" type="search" placeholder="Search" ref={inputRef}/>

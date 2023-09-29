@@ -25,6 +25,7 @@
     z-index: 9999;
     padding-top: 35px;
     padding-left: 0px;
+    z-index: 999999;
 }
 
 .unordered-list{
@@ -51,6 +52,7 @@
     height: 100vh;
     background-color: #333;
     transition: left 0.3s ease-in-out;
+    z-index: 9999;
   }
   
   .sidebar.open {
@@ -96,7 +98,7 @@
     border-radius: 45px;
     border: 5px solid red;
     background-color: #2A2A2A;
-    color: white;
+    color: red;
 }
 
 .searchicon{
@@ -118,6 +120,7 @@
     .melody-mix{
         width: 40px;
         padding-left: 30px;
+        font-size: 15px;
     }
 
     .searchBar{

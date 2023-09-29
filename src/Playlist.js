@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { getDoc, doc } from 'firebase/firestore';
@@ -10,6 +10,7 @@ function Playlist() {
   const [data,setData] = useState([]);
   const navigate = useNavigate();
   const [cookie, setCookie] = useCookies(["user-id"]);
+  const [currentAudioIndex, setCurrentAudioIndex] = useState(0);
 
   useEffect(() => {
     const userid = cookie['user-id'];
@@ -55,14 +56,33 @@ function Playlist() {
     fetchDataOfUsers();
   }, [cookie, navigate]);
   
+  const audioRef = useRef(null);
+
+  useEffect(()=>{
+    const audioElement = audioRef.current;
+
+    if(audioElement){
+      audioElement.addEventListener('ended', () => {
+        setCurrentAudioIndex((prevIndex=-1) => (prevIndex+1) % data.length);
+      });
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if(audioRef.current){
+      audioRef.current.load();
+      audioRef.current.play();      
+    }
+  }, [currentAudioIndex]);
 
 
   return (
     <div className='playlist'>
-      {data.map((music) => (
+      {data.map((music, index) => (
         <div className='audio' key={music}>
           {music.name}
-          <audio controls>
+          <audio ref={index === currentAudioIndex ? audioRef : null} controls>
+
             <source src={music.link} type="audio/mpeg" />
             Your browser does not support the audio element.
           </audio>
