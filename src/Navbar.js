@@ -40,7 +40,7 @@ function Navbar() {
         <nav className="NavBar">            
             <div className="first-portion">
                 <div className="menu" onClick={toggleSidebar}>{isOpen ? <CloseIcon/> : <MenuIcon/> }</div> 
-                <div className="logo"><img src={MelodyMix} alt="logo"/></div>   
+                <div className="logo"><img src={MelodyMix} alt="logo"/></div>
                 <div className="melody-mix"><p><strong>MELODY <br /> MIX</strong></p></div>             
             </div>                                        
             <div className="searchBar">
