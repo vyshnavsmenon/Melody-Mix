@@ -62,7 +62,7 @@ function Login() {
               const docId = docSnapshot.id;
   
               setCookie("user-id", docId, { path: "/" });
-              navigate('/');
+              navigate('/Melody-Mix/');
             } else { 
               setIsLoading(!isLoading);
               toast.error('User not found'); 
@@ -108,7 +108,7 @@ function Login() {
         console.log('Document not found');
       }
     
-      navigate('/');
+      navigate('/Melody-Mix/');
     } catch (error) {
       console.error(error);
     }

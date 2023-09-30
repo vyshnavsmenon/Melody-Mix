@@ -59,7 +59,7 @@ function Signup() {
         await updateDoc(doc(database, 'Users', userid), {id: userid}); 
         setCookie("user-id", userid, {
           path: "/" });  
-        navigate('/');
+        navigate('/Melody-Mix/');
       })      
       .catch((error)=>{
         console.log(error)
