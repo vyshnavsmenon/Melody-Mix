@@ -44,7 +44,7 @@ function Home() {
     if (audioElement) {
       audioElement.addEventListener('ended', () => {
         // Play the next audio when the current one ends
-        setCurrentAudioIndex((prevIndex=-1) => (prevIndex + 1) % data.length);
+        setCurrentAudioIndex((prevIndex) => (prevIndex + 1) % data.length);
       });
     }
   }, [data]);
