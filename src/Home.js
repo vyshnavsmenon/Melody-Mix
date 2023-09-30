@@ -2,14 +2,17 @@ import React, { useEffect, useRef, useState } from 'react';
 import './Home.css';
 import { useCookies } from 'react-cookie';
 import { database } from './firebase.js';
-import { doc, getDoc } from 'firebase/firestore';
+import { updateDoc, doc, getDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+
 
 function Home() {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   const [cookie] = useCookies(["user-id"]);
   const [currentAudioIndex, setCurrentAudioIndex] = useState(0);
+  const [isClicked, setIsClicked] = useState([]);
 
   useEffect(() => {
     const userid = cookie['user-id'];
@@ -36,35 +39,62 @@ function Home() {
     fetchData();
   }, [cookie, navigate]);
 
-  const audioRef = useRef(null);
+  const audioRefArray = useRef([]);
 
   useEffect(() => {
-    const audioElement = audioRef.current;
+    data.forEach((music, index) => {
+      const audioElement = audioRefArray.current[index];
 
-    if (audioElement) {
-      audioElement.addEventListener('ended', () => {
-        // Play the next audio when the current one ends
-        setCurrentAudioIndex((prevIndex) => (prevIndex + 1) % data.length);
-      });
-    }
+      if (audioElement) {
+        audioElement.addEventListener('ended', () => {
+          // Play the next audio when the current one ends
+          setCurrentAudioIndex((prevIndex) => (prevIndex + 1) % data.length);
+        });
+      }
+    });
   }, [data]);
 
   useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.load();
-      audioRef.current.play();
+    setIsClicked(new Array(data.length).fill(false));
+  }, [data])
+
+  useEffect(() => {
+    const audioElement = audioRefArray.current[currentAudioIndex];
+
+    if (audioElement) {
+      audioElement.load();
+      audioElement.play();
     }
   }, [currentAudioIndex]);
+
+  
+
+  async function handleFavorites(music,index){
+        const updatedIcons = [...isClicked];
+        updatedIcons[index] = !isClicked[index];
+        setIsClicked(updatedIcons);
+
+        const userid = cookie['user-id'];
+        let userData = await getDoc(doc(database, 'Users', userid));
+        console.log(userData.data());
+        await updateDoc(doc(database, 'Users', userid), {
+        audioFiles: [...userData.data().audioFiles, {link: music.link, name: music.name}] })
+        setIsClicked(!isClicked);
+
+        updatedIcons[index] = !isClicked[index];
+        setIsClicked(updatedIcons);
+  }
 
   return (
     <div className='home'>
       {data.map((music, index) => (
         <div className='audio' key={music.link}>
           {music.name}
-          <audio ref={index === currentAudioIndex ? audioRef : null} controls>
+          <audio ref={(el) => (audioRefArray.current[index] = el)} controls>
             <source src={music.link} type="audio/mpeg" />
             Your browser does not support the audio element.
           </audio>
+         <FavoriteIcon onClick={() => handleFavorites(music,index)} className={`favorite ${isClicked[index] ? 'clicked' : 'notClicked'}`}/>
         </div>
       ))}
     </div>

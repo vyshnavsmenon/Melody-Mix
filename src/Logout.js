@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './Logout.css'
 
 function Logout() {
-    const [cookies, , removeCookie] = useCookies(['user-id']);
+    const [, , removeCookie] = useCookies(['user-id']);
     const navigate = useNavigate();
 
     function handleLogout(){        
