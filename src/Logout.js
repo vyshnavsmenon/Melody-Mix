@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import './Logout.css'
 
 function Logout() {
-    const [, , removeCookie] = useCookies(['user-id']);
+    const [cookie, setCookie, removeCookie] = useCookies(['user-id']);
     const navigate = useNavigate();
 
     function handleLogout(){        
-        removeCookie('user-id');
+        removeCookie('user-id', {path: '/'});
         navigate('/login');
     }
 
@@ -18,7 +18,7 @@ function Logout() {
   return (
     <div className='background'>
       <div className='dialogue-box'>
-          <p>Are you sure you want to Logout?</p>
+          Are you sure you want to Logout?
           <div className='buttons'>
             <button onClick={handleLogout}>Yes</button>
             <button onClick={redirect}>No</button>
@@ -28,4 +28,4 @@ function Logout() {
   )
 }
 
-export default Logout
+export default Logout;
