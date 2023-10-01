@@ -142,7 +142,7 @@ function CreatePlaylist() {
       setMusicName(e.target.value);
     }
   return (    
-      <div className='Background'>
+      <div className='mainBody'>
       {
         (isLoading) ? <div className='Loader1'><Loader/></div> : 
         
@@ -151,7 +151,7 @@ function CreatePlaylist() {
             <div><input className='nameOfMusic' type="text" placeholder='Name of Music' onChange={handlemusicName}/></div>
             <div className='checkBox'>Private<input  type="checkbox" onChange={handlePrivate}/></div>  
             <div className='checkBox'>Public<input type="checkbox" onChange={handlePublic}/></div>
-            <div><button className='Button' onClick={handleSubmit}>Upload Music</button></div>
+            <div><button className='normal-btn' onClick={handleSubmit}>Upload Music</button></div>
         </div>
       }
       <ToastContainer />

@@ -1,6 +1,6 @@
 // Signup.jsx
 import React, { useState } from 'react';
-import './Signup.css';
+import './Login.css';
 import { auth } from './firebase';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
@@ -68,13 +68,13 @@ function Signup() {
   }
   
   return (
-    <div className='body'>
-      {(isLoading) ? <Loader/> : <div className='body1'>    
-          <div className='heading1'>Sign in</div>    
+    <div className='mainBody'>
+      {(isLoading) ? <Loader/> : <div className='smallBody'>    
+          <div className='heading'>Sign in</div>    
           <div><input className='bar1' type="text" placeholder='Username' onChange={readuserName}/></div>
           <div><input className='bar1' type="text" placeholder='Email id' onChange={readEmailid}/></div>
           <div><input className='bar1' type="password" placeholder='Password' onChange={readPassword}/></div>
-          <div><button className='button1' onClick={handleSignup}>Sign up</button></div>          
+          <div><button className='normal-btn' onClick={handleSignup}>Sign up</button></div>          
       </div>}
     </div>
   )

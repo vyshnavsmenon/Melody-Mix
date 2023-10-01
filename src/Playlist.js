@@ -79,15 +79,17 @@ function Playlist() {
 
   return (
     <div className='playlist'>
-      {data.map((music, index) => (
-        <div className='audio' key={music.name}>
-          {music.name}
-          <audio ref={(el) => (audioRefArray.current[index] = el)} controls>
-            <source src={music.link} type="audio/mpeg" />
-            {/* Your browser does not support the audio element. */}
-          </audio>
-        </div>
-      ))}
+      <div className='inner-div'>
+        {data.map((music, index) => (
+          <div className='audio' key={music.name}>
+            {music.name}
+            <audio ref={(el) => (audioRefArray.current[index] = el)} controls>
+              <source src={music.link} type="audio/mpeg" />
+              {/* Your browser does not support the audio element. */}
+            </audio>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

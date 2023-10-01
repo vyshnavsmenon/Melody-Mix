@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import Loader from './Loader.js';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import image from './google_prev_ui.png';
 
 
 function Login() {
@@ -133,12 +134,14 @@ function Login() {
       <div className='mainBody'>
         {(isLoading)? <Loader/> : <div className='smallBody'>
           <div className='heading'>Log in</div>
-          <div><input className='bar' type="text" placeholder='Email id' onChange={readEmailid}/></div>
-          <div><input className='bar' type="password" placeholder='Password' onChange={readPassword}/></div>
-          <div><button className={`button ${isClicked1 ? 'clicked' : 'notClicked'}`}onClick={handleLogIn}>Log in</button></div>
-          <div><button className={`button ${isClicked2 ? 'clicked' : 'notClicked'}`} onClick={handleSignin}>Sign in</button></div>
-          <div><button className={`button ${isClicked3 ? 'clicked' : 'notClicked'}`} onClick={SignInWithGoogle}>Sign in using Google</button></div>
-          <div><button className={`button ${isClicked4 ? 'clicked' : 'notClicked'}`} onClick={handleForgotPassword}>Forgot Password</button></div>          
+          <div><input className='bar' type="text" placeholder='email' onChange={readEmailid}/></div>
+          <div><input className='bar' type="password" placeholder='password' onChange={readPassword}/></div>
+          <div><button className='normal-btn' onClick={handleLogIn}>log in</button></div>
+          <div><button className='google-btn' onClick={SignInWithGoogle}><img src={image} alt="google logo"/>continue with Google</button></div>
+         <div className='botton-grp'>
+           <div>Already a user ? <a className="sign-in" onClick={handleSignin}>sign in</a></div>
+          <div><a className="forgot-password" onClick={handleForgotPassword}>Forgot Password</a></div>          
+         </div>
         </div>}        
         <ToastContainer/>
       </div>

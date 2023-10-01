@@ -1,29 +1,32 @@
 .NavBar{ 
     height: 100px;
     width: 100%;
-    background-color: #2A2A2A;
+    background-color: #1F1E1E;
     display: flex; 
     justify-content: space-between;  
     align-items: center;
     z-index: 99999;
+    padding-right: 3rem;
+    -webkit-box-shadow: 0px 0px 55px -8px rgba(31,30,30,1);
+    -moz-box-shadow: 0px 0px 55px -8px rgba(31,30,30,1);
+    box-shadow: 0px 0px 55px -8px rgba(31,30,30,1);
 }
 
 .links{
-    width: 250px;
-    height: 80px;
+    font-size: 10px;
 }
 
 .first-portion{
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
     width: 300px;
 }
 
 .menu{
-    color: red !important;   
+    color: white;  
     padding-left: 45px; 
     z-index: 9999;
-    padding-top: 35px;
     padding-left: 0px;
     z-index: 999999;
 }
@@ -31,6 +34,7 @@
 .unordered-list{
     width: 250px;
     height: 80px;
+    font-size: 10px;
     list-style: none;
     display: flex;  
     justify-content: space-around;      
@@ -39,20 +43,24 @@
 
 .list{
     text-decoration: none;
-    color: Red;
+    color: white;
     font-family: 'Poppins';
     font-size: 20px;
 }
 
 .sidebar {
     position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     left: -250px;
     top: 0;
     width: 250px;
     height: 100vh;
-    background-color: #333;
+    background-color: #1F1E1E;
     transition: left 0.3s ease-in-out;
-    z-index: 9999;
+    z-index: 99;
   }
   
   .sidebar.open {
@@ -69,43 +77,63 @@
 } */
 
 img{
-    width: 100px;
-    height: 100px;
+    width: 5rem;
+    height: 3rem;
     padding-left: 30px;
-    color: red;    
+    color: white;  
+    padding-right: 1rem; 
+    z-index: 9999; 
 }
 
 
 .melody-mix{
-    color: red;
-    font-size: 25px;
+    color: white !important;
+    font-size: 18px;
     padding-left: 3px;
-    padding-top: 19px;
-    font-family: 'Poppins', sans-serif;   
+    font-family: 'Poppins', sans-serif;  
+    z-index: 9999; 
 }
 
 .searchBar{
-    width: 400px;
-    height: 100px;
+    width: 22rem;
+    height: 3rem;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .search-Bar{
-    width: 400px;
-    width: 400px;
-    height: 50px;
-    border-radius: 45px;
-    border: 5px solid red;
-    background-color: #2A2A2A;
-    color: red;
+    padding-left: 1rem;
+    width: 20rem;
+    height: 3rem;
+    border-radius: 1rem;
+    border: none;
+    background-color: #121212;
+    color: white;
+}
+
+input:placeholder-shown{
+    color: white;
+    padding-left: 1rem;
 }
 
 .searchicon{
-    color: red !important;
+    margin-left: -2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    height: 3rem;
+    width: 3rem;
+    background-color: #121212;
+    color: white !important;
+    z-index: 999;
+    transition: all 0.3s ease-in-out;
 }
 
+.searchicon:hover{
+    background-color: #EE3240;
+}
 
 @media (max-width: 768px){
 
