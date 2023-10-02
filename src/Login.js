@@ -137,7 +137,7 @@ function Login() {
           <div><input className='bar' type="text" placeholder='email' onChange={readEmailid}/></div>
           <div><input className='bar' type="password" placeholder='password' onChange={readPassword}/></div>
           <div><button className='normal-btn' onClick={handleLogIn}>log in</button></div>
-          <div><button className='google-btn' onClick={SignInWithGoogle}><img src={image} alt="google logo"/>continue with Google</button></div>
+          <div><button className='google-btn' onClick={SignInWithGoogle}><div className='google'><img src={image} alt="google logo"/></div><p>continue with Google</p></button></div>
          <div className='botton-grp'>
            <div>Already a user ? <a className="sign-in" onClick={handleSignin}>sign in</a></div>
           <div><a className="forgot-password" onClick={handleForgotPassword}>Forgot Password</a></div>          

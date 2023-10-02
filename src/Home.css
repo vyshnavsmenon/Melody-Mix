@@ -58,3 +58,21 @@
 } */
 
 /* still no change btw home page il thanne aano nokkiye.. */
+
+@media (max-width: 768px) {
+
+    .inner-div{
+        padding-top: 2rem;
+        width: 100%;
+    }
+
+    .home{
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .audio audio{
+        width: 18rem;
+    }
+
+}

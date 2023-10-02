@@ -141,6 +141,11 @@ input:placeholder-shown{
         display: none;
     }
 
+    .menu{
+        padding-bottom: 2.5rem;
+        padding-right: 1rem;
+    }
+
     .logo{
         width: 65px;
         height: 100px;
@@ -151,7 +156,6 @@ input:placeholder-shown{
 
     .melody-mix{
         width: 90px;
-        padding-top: 35px;
         font-size: 15px;
     }
 
@@ -165,7 +169,7 @@ input:placeholder-shown{
 
     img{
         width: 50px;
-        height: 55px;
+        height: 45px;
         padding-top: 8px;
         padding-left: 3px;
     }
