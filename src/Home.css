@@ -1,7 +1,7 @@
 .home{
     font-family: 'Poppins';
-    background-color: black;
-    color: red;
+    background-color: #121212;
+    color: white;
     width: 100%;
     height: 100vh;
     display: flex;
@@ -11,13 +11,39 @@
     
 }
 
+.inner-div{
+    width: 50rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .audio{
-    padding-top: 10px;
+    margin-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 4rem;
     z-index: 1;
+    background-color: #1F1E1E;
+    border-radius: 1rem;
+}
+
+.audio audio {
+    width: 30rem;
+}
+
+.audio p{
+    max-width: 3rem;
 }
 
 .favorite.notClicked{
     color: white !important;
+    transition: all 0.3s ease-in;
 }
 
 .favorite.clicked{

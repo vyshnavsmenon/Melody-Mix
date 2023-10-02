@@ -87,16 +87,18 @@ function Home() {
 
   return (
     <div className='home'>
-      {data.map((music, index) => (
-        <div className='audio' key={music.link}>
-          {music.name}
-          <audio ref={(el) => (audioRefArray.current[index] = el)} controls>
-            <source src={music.link} type="audio/mpeg" />
-            Your browser does not support the audio element.
-          </audio>
-         <FavoriteIcon onClick={() => handleFavorites(music,index)} className={`favorite ${isClicked[index] ? 'clicked' : 'notClicked'}`}/>
-        </div>
-      ))}
+      <div className='inner-div'>
+        {data.map((music, index) => (
+          <div className='audio' key={music.link}>
+            <p>{music.name}</p>
+            <audio ref={(el) => (audioRefArray.current[index] = el)} controls>
+              <source src={music.link} type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+          <FavoriteIcon onClick={() => handleFavorites(music,index)} className={`favorite ${isClicked[index] ? 'clicked' : 'notClicked'}`}/>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

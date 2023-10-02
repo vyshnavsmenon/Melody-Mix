@@ -41,7 +41,7 @@ function Navbar() {
             <div className="first-portion">
                 <div className="menu" onClick={toggleSidebar}>{isOpen ? <CloseIcon/> : <MenuIcon/> }</div> 
                 <div className="logo"><img src={MelodyMix} alt="logo"/></div>
-                <div className="melody-mix"><p><strong>MELODY <br /> MIX</strong></p></div>             
+                <div className="melody-mix"><p><strong>MELODY MIX</strong></p></div>             
             </div>                                        
             <div className="searchBar">
                 <input className="search-Bar" type="search" placeholder="Search" ref={inputRef}/>
@@ -73,7 +73,7 @@ function Navbar() {
                 <li>
                     <Link className="link" to="/"><li className="icon">
                     <HomeIcon/>
-                    </li>Home</Link>
+                    </li><p>Home</p></Link>
                 </li>
             </div>            
             <div className="content">                
@@ -82,7 +82,7 @@ function Navbar() {
                     <li className="icon">
                     <QueueMusicIcon/>
                 </li>
-                        Playlist</Link>
+                        <p>Playlist</p></Link>
 
                 </li> 
             </div>   
@@ -92,7 +92,7 @@ function Navbar() {
                     <li className="icon">
                     <PlaylistAddIcon/>
                 </li>
-                        Create Playlist</Link>
+                        <p>Create Playlist</p></Link>
 
                 </li> 
             </div>    
@@ -102,7 +102,7 @@ function Navbar() {
                     <li className="icon">
                     <UploadIcon/>
                 </li>
-                        Upload Music</Link>
+                        <p>Upload Music</p></Link>
 
                 </li> 
             </div>    
@@ -112,7 +112,7 @@ function Navbar() {
                     <li className="icon">
                     <LogoutIcon/>
                 </li>
-                        Logout</Link>
+                        <p>Logout</p></Link>
 
                 </li> 
             </div>    
