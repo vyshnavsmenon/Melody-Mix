@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/Melody-Mix/static/css/main.d32c673f.css",
-    "main.js": "/Melody-Mix/static/js/main.cf05ef8f.js",
+    "main.css": "/Melody-Mix/static/css/main.ca62fd6a.css",
+    "main.js": "/Melody-Mix/static/js/main.9936f79f.js",
     "static/media/google_prev_ui.png": "/Melody-Mix/static/media/google_prev_ui.edff1e04f0277333dbc7.png",
     "index.html": "/Melody-Mix/index.html",
-    "main.d32c673f.css.map": "/Melody-Mix/static/css/main.d32c673f.css.map",
-    "main.cf05ef8f.js.map": "/Melody-Mix/static/js/main.cf05ef8f.js.map"
+    "main.ca62fd6a.css.map": "/Melody-Mix/static/css/main.ca62fd6a.css.map",
+    "main.9936f79f.js.map": "/Melody-Mix/static/js/main.9936f79f.js.map"
   },
   "entrypoints": [
-    "static/css/main.d32c673f.css",
-    "static/js/main.cf05ef8f.js"
+    "static/css/main.ca62fd6a.css",
+    "static/js/main.9936f79f.js"
   ]
 }
