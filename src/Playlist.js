@@ -1,15 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-import { getDoc, doc } from 'firebase/firestore';
+import { getDoc, doc, updateDoc, arrayRemove } from 'firebase/firestore';
 import { database } from './firebase';
 import './Playlist.css';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function Playlist() {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   const [cookie] = useCookies(["user-id"]);
   const [currentAudioIndex, setCurrentAudioIndex] = useState(0);
+  const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
     const userid = cookie['user-id'];
@@ -77,6 +79,24 @@ function Playlist() {
     }
   }, [currentAudioIndex]);
 
+  async function handleDelete(music,index){
+    setIsClicked(!isClicked);
+    try{
+      const userid = cookie['user-id'];
+
+    const userDocRef = doc(database, "Users", userid);
+    await updateDoc(userDocRef, {
+      audioFiles : arrayRemove(music)
+    });
+
+    setData((prev) => prev.filter((_,i) => i != index));    
+    }
+    catch(error) {
+      console.error("Error : ", error)
+    }
+    setIsClicked(!isClicked);
+  }
+
   return (
     <div className='playlist'>
       <div className='inner-div'>
@@ -87,6 +107,7 @@ function Playlist() {
               <source src={music.link} type="audio/mpeg" />
               {/* Your browser does not support the audio element. */}
             </audio>
+            <DeleteIcon onClick={() => handleDelete(music,index)} className={`delete ${isClicked[index] ? 'clicked' : 'notClicked'}`} />
           </div>
         ))}
       </div>
