@@ -124,6 +124,10 @@ input:focus{
     padding-bottom: 1rem;
 }
 
+.toastContainer{
+    z-index: 9999999;
+}
+
 @media (max-width: 767px) {
     .google{
         display: flex;

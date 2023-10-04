@@ -12,6 +12,8 @@ function Playlist() {
   const [cookie] = useCookies(["user-id"]);
   const [currentAudioIndex, setCurrentAudioIndex] = useState(0);
   const [isClicked, setIsClicked] = useState(false);
+  const audioRef = useRef([]);
+  const currentAudioRef = useRef(null);
 
   useEffect(() => {
     const userid = cookie['user-id'];
@@ -73,6 +75,11 @@ function Playlist() {
   useEffect(() => {
     const audioElement = audioRefArray.current[currentAudioIndex];
 
+    if (currentAudioRef.current) {
+      currentAudioRef.current.pause(); // Pause the previous audio
+      currentAudioRef.current = null; // Reset the reference to the previous audio
+    }
+
     if (audioElement) {
       audioElement.load();
       audioElement.play();
@@ -90,6 +97,13 @@ function Playlist() {
     });
 
     setData((prev) => prev.filter((_,i) => i != index));    
+
+    if (index === currentAudioIndex) {
+      currentAudioRef.current.pause();
+      currentAudioRef.current = null;
+      setCurrentAudioIndex(null);
+    }
+    
     }
     catch(error) {
       console.error("Error : ", error)

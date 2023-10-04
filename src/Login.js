@@ -144,7 +144,7 @@ function Login() {
           <div><a className="forgot-password" onClick={handleForgotPassword}>Forgot Password</a></div>          
          </div>
         </div>}        
-        <ToastContainer/>
+        <ToastContainer />
       </div>
   )
 }
