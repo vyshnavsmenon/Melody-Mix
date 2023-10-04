@@ -65,10 +65,7 @@ function Navbar() {
                     }} ><SearchIcon/></div>
             </div> 
                 <div className="links">                    
-                    <ul className="unordered-list">
-                        {/* <li onClick={handleColor} className={`favorite ${isClicked ? 'clicked' : 'notClicked'}`}> 
-                            <FavoriteIcon/>
-                        </li> */}
+                    <ul className="unordered-list">                        
                         <li>
                             <Link className="list" to="/login">Log In</Link>
                         </li>
