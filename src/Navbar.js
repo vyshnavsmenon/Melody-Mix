@@ -52,7 +52,7 @@ function Navbar() {
 
   return (
     <>
-        <nav className="NavBar" ref={sidebarRef}>            
+        <nav className="NavBar" >            
             <div className="first-portion">
                 <div className="menu" onClick={toggleSidebar}>{isOpen ? <CloseIcon/> : <MenuIcon/> }</div> 
                 <div className="logo"><img src={MelodyMix} alt="logo"/></div>
@@ -64,7 +64,7 @@ function Navbar() {
                         navigate("/searchResult");
                     }} ><SearchIcon/></div>
             </div> 
-                <div className="links">                    
+                <div className="links" >                    
                     <ul className="unordered-list">
                         {/* <li onClick={handleColor} className={`favorite ${isClicked ? 'clicked' : 'notClicked'}`}> 
                             <FavoriteIcon/>
@@ -74,14 +74,16 @@ function Navbar() {
                         </li>
                         <li >
                             <Link className="list" to="/signup">Sign Up</Link>
-                        </li>                        <li >
+                        </li>                        
+                        <li >
                             <Link className="list" to="/about">About</Link>
                         </li>
                     </ul>    
             </div>               
         </nav>
+          
             
-        <div className={`sidebar ${isOpen ? 'open' : ''}`}>
+        <div className={`sidebar ${isOpen ? 'open' : ''}`} ref={sidebarRef}>
         <ul className="unordered" >
             <div className="content">            
                 
@@ -131,7 +133,7 @@ function Navbar() {
 
                 </li> 
             </div>    
-        </ul>                               
+        </ul>                           
         </div>
     </>
   )
