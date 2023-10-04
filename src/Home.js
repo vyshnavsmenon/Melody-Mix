@@ -13,6 +13,7 @@ function Home() {
   const [cookie] = useCookies(["user-id"]);
   const [currentAudioIndex, setCurrentAudioIndex] = useState(0);
   const [isClicked, setIsClicked] = useState([]);
+  const [currentAudio, setCurrentAudio] = useState(null);
 
   useEffect(() => {
     const userid = cookie['user-id'];
@@ -53,6 +54,7 @@ function Home() {
       }
     });
   }, [data]);
+  
 
   useEffect(() => {
     setIsClicked(new Array(data.length).fill(false));
@@ -60,10 +62,13 @@ function Home() {
 
   useEffect(() => {
     const audioElement = audioRefArray.current[currentAudioIndex];
+    console.log(audioElement);
 
     if (audioElement) {
       audioElement.load();
       audioElement.play();
+      setCurrentAudio(audioElement);
+      console.log(currentAudio);
     }
   }, [currentAudioIndex]);
 
