@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import './Navbar.css';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import './Menubar.css';
 import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
@@ -27,6 +27,21 @@ function Navbar() {
         ]
     })
 
+    const sidebarRef = useRef();
+
+    useEffect(() => {
+        let handler = (e) => {
+            if(!sidebarRef.current.contains(e.target)){
+                if(isOpen){
+                    setIsOpen(false);
+                }
+            }
+        }
+
+        document.addEventListener("mousedown", handler);
+
+    });
+
     function toggleSidebar () {
         setIsOpen(!isOpen);
       };
@@ -37,7 +52,7 @@ function Navbar() {
 
   return (
     <>
-        <nav className="NavBar">            
+        <nav className="NavBar" ref={sidebarRef}>            
             <div className="first-portion">
                 <div className="menu" onClick={toggleSidebar}>{isOpen ? <CloseIcon/> : <MenuIcon/> }</div> 
                 <div className="logo"><img src={MelodyMix} alt="logo"/></div>
@@ -67,7 +82,7 @@ function Navbar() {
         </nav>
             
         <div className={`sidebar ${isOpen ? 'open' : ''}`}>
-        <ul className="unordered">
+        <ul className="unordered" >
             <div className="content">            
                 
                 <li>

@@ -65,17 +65,17 @@ function Login() {
               setCookie("user-id", docId, { path: "/" });
               navigate('/');
             } else { 
-              setIsLoading(!isLoading);
+              setIsLoading((prev) => {return !prev});
               toast.error('User not found'); 
             }
           })
           .catch((error) => {
-            setIsLoading(!isLoading);
+            setIsLoading((prev) => {return !prev});
             toast.error(error.message);
-          });//ippo njn online il aano.. atho poyo..
+          });
       })
       .catch((error) => {
-        setIsLoading(!isLoading);
+        setIsLoading((prev) => {return !prev});
         toast.error(error.message);
       });
       setIsLoading(!isLoading);
@@ -111,6 +111,7 @@ function Login() {
     
       navigate('/');
     } catch (error) {
+      setIsLoading(!isLoading);
       console.error(error);
     }
     setIsLoading(!isLoading);

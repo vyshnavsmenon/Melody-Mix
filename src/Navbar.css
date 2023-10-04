@@ -1,5 +1,5 @@
 .NavBar{ 
-    height: 100px;
+    height: 90px;
     width: 100%;
     background-color: #1F1E1E;
     display: flex; 
@@ -78,7 +78,7 @@
 
 img{
     width: 5rem;
-    height: 3rem;
+    height: 2.5rem;
     padding-left: 30px;
     color: white;  
     padding-right: 1rem; 
@@ -133,6 +133,10 @@ input:placeholder-shown{
 
 .searchicon:hover{
     background-color: #EE3240;
+}
+
+.content p{
+    color: white;
 }
 
 @media (max-width: 768px){

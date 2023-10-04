@@ -1,6 +1,6 @@
 .mainBody{
     width: 100%;
-    height: 100dvh;
+    height: calc(100dvh - 90px);
     background: #121212 !important;
     display: flex;
     align-items: center;

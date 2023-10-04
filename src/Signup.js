@@ -62,6 +62,7 @@ function Signup() {
         navigate('/');
       })      
       .catch((error)=>{
+        setIsLoading((prev) => {return !prev});
         console.log(error)
       })
       setIsLoading(!isLoading);
