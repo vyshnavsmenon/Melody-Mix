@@ -125,6 +125,16 @@ function Navbar() {
             </div>    
             <div className="content">                
                 <li>
+                    <Link className="link" to="/videoStreaming">
+                    {/* <li className="icon">
+                    <UploadIcon/>
+                </li> */}
+                        <p>Video</p></Link>
+
+                </li> 
+            </div>    
+            <div className="content">                
+                <li>
                     <Link className="link" to="/logout">
                     <li className="icon">
                     <LogoutIcon/>
