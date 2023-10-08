@@ -5,6 +5,7 @@ import { getDoc, doc, updateDoc, arrayRemove } from 'firebase/firestore';
 import { database } from './firebase';
 import './Playlist.css';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Skeleton from '@mui/material/Skeleton';
 
 function Playlist() {
   const [data, setData] = useState([]);
@@ -12,8 +13,10 @@ function Playlist() {
   const [cookie] = useCookies(["user-id"]);
   const [currentAudioIndex, setCurrentAudioIndex] = useState(0);
   const [isClicked, setIsClicked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     const userid = cookie['user-id'];
 
     if (!userid) {
@@ -30,11 +33,14 @@ function Playlist() {
         if (userDoc.exists()) {
           const userData = userDoc.data();
           console.log("User data:", userData);
+          setIsLoading(false);
         } else {
           console.log("User document does not exist");
+          setIsLoading(false);
         }
       } catch (error) {
         console.error("An error occurred while fetching user data:", error);
+        setIsLoading(false);
       }
     }
 
@@ -45,8 +51,10 @@ function Playlist() {
           setData(response.data().audioFiles || []);
         } else {
           console.log("Document not found");
+          setIsLoading(false);
         }
       } catch (error) {
+        setIsLoading(false);
         console.error("Error fetching data:", error);
       }
     }
@@ -100,6 +108,50 @@ function Playlist() {
   return (
     <div className='playlist'>
       <div className='inner-div'>
+      {isLoading && <>
+          <Skeleton
+          sx={{ bgcolor: 'grey.900', margin: '1rem',}}
+          variant="rectangular"
+          width={810}
+          height={55}
+        />
+          <Skeleton
+          sx={{ bgcolor: 'grey.900', margin: '1rem' }}
+          variant="rectangular"
+          width={810}
+          height={55}
+        />
+        <Skeleton
+          sx={{ bgcolor: 'grey.900',margin: '1rem' }}
+          variant="rectangular"
+          width={810}
+          height={55}
+        />
+        <Skeleton
+          sx={{ bgcolor: 'grey.900', margin: '1rem' }}
+          variant="rectangular"
+          width={810}
+          height={55}
+        />
+        <Skeleton
+          sx={{ bgcolor: 'grey.900', margin: '1rem' }}
+          variant="rectangular"
+          width={810}
+          height={55}
+        />
+        <Skeleton
+          sx={{ bgcolor: 'grey.900', margin: '1rem'}}
+          variant="rectangular"
+          width={810}
+          height={55}
+        />
+        <Skeleton
+          sx={{ bgcolor: 'grey.900', margin: '1rem' }}
+          variant="rectangular"
+          width={810}
+          height={55}
+        />
+        </>}
         {data.map((music, index) => (
           <div className='audio' key={music.name}>
             <p>{music.name}</p>

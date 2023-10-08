@@ -13,9 +13,6 @@
     box-shadow: 0px 0px 55px -8px rgba(31,30,30,1);
 }
 
-.links{
-    font-size: 10px;
-}
 
 .first-portion{
     display: flex;
@@ -35,7 +32,8 @@
 .unordered-list{
     width: 250px;
     height: 80px;
-    font-size: 10px;
+    color: white;
+    font-size: 16px;
     list-style: none;
     display: flex;  
     justify-content: space-around;      
@@ -43,10 +41,8 @@
 }
 
 .list{
-    text-decoration: none;
-    color: white;
-    font-family: 'Poppins';
-    font-size: 20px;
+    all: unset;
+    outline: none;
 }
 
 .sidebar {
@@ -140,12 +136,20 @@ input:placeholder-shown{
     color: white;
 }
 
-.bottomNav{
-    position: absolute;
+.bottomNav-container{
+    display: none;
+    position: fixed;
     bottom: 0;
     width: 100%;
     height: 70px;
-    border-radius: 1rem;
+    z-index: 999999;
+}
+
+.bottomNav{
+    position: absolute;
+    width: 100%;
+    height: 70px;
+    /* border-radius: 2rem; */
     background-color: #1F1E1E;
     color: white;
     display: flex;
@@ -154,15 +158,37 @@ input:placeholder-shown{
     transition: all 0.3s ease-in-out;
 }
 
+.bottomNav span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 6rem;
+    height: 6rem;
+    transition: all 0.3s ease-in-out;
+}
 
+.bottom-icon{
+    width: 100%;
+    height: 100%;
+}
+
+.bottomNav span:hover{
+    color: #EE3240;
+    transform: translateY(-4px);
+}
 
 @media (max-width: 768px){
+
+    .bottomNav-container{
+        display: block;
+    }
 
     .unordered-list{
         display: none;
     }
 
     .menu{
+        display: none;
         padding-bottom: 2.5rem;
         padding-right: 1rem;
     }

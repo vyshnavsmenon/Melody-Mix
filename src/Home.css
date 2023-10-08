@@ -3,7 +3,7 @@
     background-color: #121212;
     color: white;
     width: 100%;
-    min-width: calc(100dvh - 90px);
+    min-height: calc(100dvh - 90px);
     height: auto;
     display: flex;
     justify-content: space-evenly;
@@ -35,8 +35,14 @@
 }
 
 .audio audio {
+    background-color: #121212;
     width: 30rem;
 }
+
+/* .skeleton-loading{
+    width: 100% !important;
+    height: 9rem !important;
+} */
 
 .audio p{
     max-width: 3rem;
@@ -76,6 +82,7 @@
     .inner-div{
         padding-top: 2rem;
         width: 100%;
+        padding-bottom: 4rem;
     }
 
     .home{
