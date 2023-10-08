@@ -1,0 +1,71 @@
+.videoStreaming{
+    min-height: 100vh;
+    height: auto;
+    width: 100%;
+    background-color: #121212;
+    display: flex;
+    /* justify-content: center;     */
+}
+
+.video-div{
+    width: 61rem;
+    height: auto;
+    padding: 10px;
+}
+
+video{
+    width: 59rem;
+    height: 30rem;
+}
+
+h1{
+    color: white;
+}
+
+.icons{
+    width: 8rem;
+    height: 2rem;
+    padding-top: 5px;
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+@keyframes slide-in {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(0); }
+  }
+
+  
+.comment.displaying{
+    width: 59rem;
+    height: 15rem;
+    background-color: white;
+    animation: slide-in 0.3s ease;
+}
+
+.comment.notDisplaying{
+    display: none;
+}
+
+.favoriteicon.clicked{
+    color: red !important;
+    animation: heartBeat 1s infinite linear;
+    animation-timing-function: steps(10);
+}
+
+.favoriteicon.notClicked{
+    color: white !important;
+    transition: all 0.3s ease-in;
+}
+
+.icon.clicked{
+    color: red !important;    
+}
+
+.icon.notClicked{
+    color: white !important;
+}
+
+
+

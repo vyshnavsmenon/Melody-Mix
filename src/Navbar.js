@@ -64,7 +64,7 @@ function Navbar() {
                         navigate("/searchResult");
                     }} ><SearchIcon/></div>
             </div> 
-                <div className="links" >                    
+                <div className="links">                    
                     <ul className="unordered-list">
                         {/* <li onClick={handleColor} className={`favorite ${isClicked ? 'clicked' : 'notClicked'}`}> 
                             <FavoriteIcon/>
@@ -128,6 +128,16 @@ function Navbar() {
                     <UploadIcon/>
                 </li>
                         <p>Upload Music</p></Link>
+
+                </li> 
+            </div>    
+            <div className="content">                
+                <li>
+                    <Link className="link" to="/videoStreaming">
+                    {/* <li className="icon">
+                    <UploadIcon/>
+                </li> */}
+                        <p>Video</p></Link>
 
                 </li> 
             </div>    
