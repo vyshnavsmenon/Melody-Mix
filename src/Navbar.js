@@ -81,6 +81,14 @@ function Navbar() {
                     </ul>    
             </div>               
         </nav>
+        <div className="bottomNav-container">
+        <div className="bottomNav">
+        <span><Link className="list" to="/"><HomeIcon className="bottom-icon"/></Link></span>
+        <span><Link className="list" to="/playlist"><QueueMusicIcon className="bottom-icon"/></Link></span>                                
+            <span><Link className="list" to="/createPlaylist"><UploadIcon className="bottom-icon"/></Link></span>  
+            <span><Link className="list" to="/logout"><LogoutIcon className="bottom-icon"/></Link></span>              
+        </div>
+        </div>
           
             
         <div className={`sidebar ${isOpen ? 'open' : ''}`} ref={sidebarRef}>
