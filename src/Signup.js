@@ -21,9 +21,11 @@ import {
 import Loader from './Loader';
 
 function Signup() {
+  const [fullname, setFullName] = useState();
   const [username, setUsername] = useState();
   const [emailid, setEmailid] = useState();
   const [password, setPassword] = useState();
+  const [Phone, setPhone] = useState();
   const navigate = useNavigate();
   const provider = new GoogleAuthProvider();
   const [cookies, setCookie] = useCookies([]);
@@ -41,6 +43,12 @@ function Signup() {
   {
     setPassword(e.target.value);
   }
+  function readFullName(e){
+    setFullName(e.target.value);
+  }
+  function readNumber(e){
+    setPhone(e.target.value);
+  }
   async function handleSignup()
   {
     setIsLoading(!isLoading);
@@ -50,9 +58,11 @@ function Signup() {
         
         console.log(response)    
         const docRef = await addDoc(collection(database, 'Users'),{
+          fullname : fullname,
           username : username,
           emailid : emailid,
           password : password,
+          phone : Phone,
           audioFiles: [],
         }); 
         const userid = docRef.id;
@@ -68,13 +78,16 @@ function Signup() {
       setIsLoading(!isLoading);
   }
   
+
   return (
     <div className='mainBody'>
       {(isLoading) ? <Loader/> : <div className='smallBody'>    
-          <div className='heading'>Sign in</div>    
+          <div className='heading'>Sign in</div>
+          <div><input className='bar1' type="text" placeholder='Full Name' onChange={readFullName}/></div>    
           <div><input className='bar1' type="text" placeholder='Username' onChange={readuserName}/></div>
           <div><input className='bar1' type="text" placeholder='Email id' onChange={readEmailid}/></div>
           <div><input className='bar1' type="password" placeholder='Password' onChange={readPassword}/></div>
+          <div><input className='bar1' type="number" placeholder='Phone Number(optional)' onChange={readNumber}/></div>
           <div><button className='normal-btn' onClick={handleSignup}>Sign up</button></div>          
       </div>}
     </div>
