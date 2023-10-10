@@ -19,6 +19,7 @@ function CreatePlaylist() {
     const [publicMusic, setPublicMusic] = useState(false);
     const [privateMusic, setPrivateMusic] = useState(false);
     const [musicName, setMusicName] = useState("") 
+    const [singerName, setSingerName] = useState();
     const navigate = useNavigate(); 
     const [isLoading, setIsLoading] = useState(false);
     const [file, setFile] = useState();
@@ -103,7 +104,7 @@ function CreatePlaylist() {
                 let musicData = await getDoc(doc(database, 'Music', "dvGhfPODSRgcOYm6tYl7")); 
                 console.log(musicData.data());
                 await updateDoc(doc(database, 'Music', "dvGhfPODSRgcOYm6tYl7"), { 
-                  musicLink: [...musicData.data().musicLink, {link: downloadURL , name: musicName, imageUrl: imageUrl}]
+                  musicLink: [...musicData.data().musicLink, {link: downloadURL , name: musicName, imageUrl: imageUrl, SingerName: singerName}]
                 });
                   // await addDoc(collection(database, "Music"), {
                   //   musicLink : downloadURL,
@@ -150,7 +151,7 @@ function CreatePlaylist() {
                 let userData = await getDoc(doc(database, 'Users', userid));
                 console.log(userData.data());
                 await updateDoc(doc(database, 'Users', userid), {
-                  audioFiles: [...userData.data().audioFiles, {link: downloadURL, name: musicName, imageUrl: imageUrl}] 
+                  audioFiles: [...userData.data().audioFiles, {link: downloadURL, name: musicName, imageUrl: imageUrl, SingerName: singerName}] 
                 }); 
               });
           }
@@ -175,6 +176,9 @@ function CreatePlaylist() {
     {
       setFile(e.target.files[0]);
     }
+    function handlesingerName(e){
+      setSingerName(e.target.value);
+    }
   return (    
       <div className='mainBody'>
       {
@@ -184,6 +188,7 @@ function CreatePlaylist() {
           <div className='audioFile'><p className='choose'>Choose a Song</p><input className='file' type="file" accept="audio/*" onChange={handleRead}/></div>
           <div className='audioFile'><p className='choose'>Choose an Image</p><input className='file' type="file" accept="image/*" onChange={handleImage}/></div>
             <div><input className='nameOfMusic' type="text" placeholder='Name of Music' onChange={handlemusicName}/></div>
+            <div><input className='nameOfMusic' type="text" placeholder='Name of the Singer' onChange={handlesingerName}/></div>
             <div className='checkBox'>Private<input  type="checkbox" onChange={handlePrivate}/></div>  
             <div className='checkBox'>Public<input type="checkbox" onChange={handlePublic}/></div>
             <div><button className='normal-btn' onClick={handleSubmit}>Upload Music</button></div>

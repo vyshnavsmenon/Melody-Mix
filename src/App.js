@@ -9,6 +9,7 @@ import Logout from './Logout';
 import SearchResult from './SearchResult';
 import VideoStreaming from './VideoStreaming';
 import {  Routes, Route } from 'react-router-dom';
+import Profile from './Profile';
 
 
 function App() { 
@@ -26,6 +27,7 @@ function App() {
             <Route path='/searchResult' element={<SearchResult  />}></Route>
             <Route path='/Melody-Mix' element={<Home />} />
             <Route path='/videoStreaming' element={<VideoStreaming />} />
+            <Route path='/profile' element={<Profile/>} />
           </Routes>                   
     </>
   )
