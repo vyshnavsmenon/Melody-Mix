@@ -11,6 +11,18 @@
     z-index: 1;
 }
 
+.choose{
+    width: 162px;
+    padding-left: 109px;
+}
+
+.audioFile{
+    font-size: 15px;
+    width: 480px;
+    height: 50px;
+    display: flex;
+}
+
 .Loader1 {
     width: 100%;
     height: 585px;

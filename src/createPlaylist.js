@@ -21,7 +21,10 @@ function CreatePlaylist() {
     const [musicName, setMusicName] = useState("") 
     const navigate = useNavigate(); 
     const [isLoading, setIsLoading] = useState(false);
+    const [file, setFile] = useState();
+    const [imageUrl, setImageUrl] = useState('https://cdn1.iconfinder.com/data/icons/metro-ui-dock-icon-set--icons-by-dakirby/128/Music.png')
     
+
     
     useEffect(() => {
       const userid = cookies['user-id'];
@@ -41,6 +44,31 @@ function CreatePlaylist() {
     async function handleSubmit()
     {
         setIsLoading(!isLoading);
+        const storageRef = ref(storage, `/files/${file}`);
+
+    // Upload the image
+    const uploadTask = uploadBytesResumable(storageRef, file);
+    
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const percentage = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        console.log("Upload is " + percentage + "% done");
+      },
+      (error) => {
+        console.error("Error uploading image: ", error);
+      },
+      () => {
+        // Upload completed successfully, get the download URL
+        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+          console.log("File available at", url);
+          setImageUrl(url);
+          // Now you can proceed to handleSignup() with the image URL
+        }).catch((error) => {
+          console.error("Error getting download URL: ", error);
+        });
+      }
+    );  
         if(!privateMusic)
         {
           // aah nammal else kodutha almost ellam ividem veename except user ntel aa link attach cheyyanath ozhich.eda ...njn ee else il oru grp of codes select cheyyam ath alle ivde aadhyam kodkkande enn nokkko?? hello r u there?
@@ -75,7 +103,7 @@ function CreatePlaylist() {
                 let musicData = await getDoc(doc(database, 'Music', "dvGhfPODSRgcOYm6tYl7")); 
                 console.log(musicData.data());
                 await updateDoc(doc(database, 'Music', "dvGhfPODSRgcOYm6tYl7"), { 
-                  musicLink: [...musicData.data().musicLink, {link: downloadURL , name: musicName}]
+                  musicLink: [...musicData.data().musicLink, {link: downloadURL , name: musicName, imageUrl: imageUrl}]
                 });
                   // await addDoc(collection(database, "Music"), {
                   //   musicLink : downloadURL,
@@ -122,13 +150,15 @@ function CreatePlaylist() {
                 let userData = await getDoc(doc(database, 'Users', userid));
                 console.log(userData.data());
                 await updateDoc(doc(database, 'Users', userid), {
-                  audioFiles: [...userData.data().audioFiles, {link: downloadURL, name: musicName}] 
+                  audioFiles: [...userData.data().audioFiles, {link: downloadURL, name: musicName, imageUrl: imageUrl}] 
                 }); 
               });
           }
         );
         setIsLoading(!isLoading);               
-        }        
+        }
+        
+    
     }
     function handlePublic(){
       setPublicMusic(!publicMusic); 
@@ -141,13 +171,18 @@ function CreatePlaylist() {
     {
       setMusicName(e.target.value);
     }
+    function handleImage(e)
+    {
+      setFile(e.target.files[0]);
+    }
   return (    
       <div className='mainBody'>
       {
         (isLoading) ? <div className='Loader1'><Loader/></div> : 
         
         <div className="small-Body">
-          <div><input className='file' type="file" accept="audio/*" onChange={handleRead}/></div>
+          <div className='audioFile'><p className='choose'>Choose a Song</p><input className='file' type="file" accept="audio/*" onChange={handleRead}/></div>
+          <div className='audioFile'><p className='choose'>Choose an Image</p><input className='file' type="file" accept="image/*" onChange={handleImage}/></div>
             <div><input className='nameOfMusic' type="text" placeholder='Name of Music' onChange={handlemusicName}/></div>
             <div className='checkBox'>Private<input  type="checkbox" onChange={handlePrivate}/></div>  
             <div className='checkBox'>Public<input type="checkbox" onChange={handlePublic}/></div>
