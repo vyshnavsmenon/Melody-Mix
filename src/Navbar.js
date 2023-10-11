@@ -45,14 +45,24 @@ function Navbar() {
 
         document.addEventListener("mousedown", handler);
 
-    });
+    return () => {
+        // Cleanup the event listener when component is unmounted
+        document.removeEventListener("mousedown", handler);
+    };
+}, [isOpen]);
+    
 
     useEffect(() => {
         async function fetchData(){
-            const userid = cookie['user-id'];
-            const response = await getDoc(doc(database, "Users", userid))
-            if(response.exists()){
-                setImageUrl(response.data().imageUrl);
+            try{
+                const userid = cookie['user-id'];
+                const response = await getDoc(doc(database, "Users", userid))
+                if(response.exists()){
+                    setImageUrl(response.data().imageUrl);
+                }    
+            }  
+            catch(error){                
+                console.log("Error fetching data: ", error);
             }
         }
     })
