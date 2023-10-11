@@ -11,6 +11,18 @@
     z-index: 1;
 }
 
+.choose{
+    width: 162px;
+    padding-left: 109px;
+}
+
+.audioFile{
+    font-size: 15px;
+    width: 480px;
+    height: 50px;
+    display: flex;
+}
+
 .Loader1 {
     width: 100%;
     height: 585px;
@@ -23,7 +35,7 @@
 .small-Body{
     color: white;
     width: 30rem;
-    height: 485px;
+    height: 35rem;
     background-color: #1F1E1E;
     display: flex;
     flex-direction: column;

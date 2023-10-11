@@ -10,6 +10,7 @@ import SearchResult from './SearchResult';
 import VideoStreaming from './VideoStreaming';
 import VideoReceiving from './VideoReceiving';
 import {  Routes, Route } from 'react-router-dom';
+import Profile from './Profile';
 
 
 function App() { 
@@ -27,7 +28,11 @@ function App() {
             <Route path='/searchResult' element={<SearchResult  />}></Route>
             <Route path='/Melody-Mix' element={<Home />} />
             <Route path='/videoStreaming' element={<VideoStreaming />} />
+<<<<<<< HEAD
             <Route path='/videoReceiving/:id' element={<VideoReceiving/>} />
+=======
+            <Route path='/profile' element={<Profile/>} />
+>>>>>>> 84c3a0c63af0d7a506b66e1f72df2f5415b9292b
           </Routes>                   
     </>
   )

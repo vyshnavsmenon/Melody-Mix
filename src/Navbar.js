@@ -75,7 +75,10 @@ function Navbar() {
                         </li>
                         <li >
                             <Link className="list" to="/signup">Sign Up</Link>
-                        </li>                        
+                        </li> 
+                        <li >
+                            <Link className="list" to="/profile">Profile</Link>
+                        </li>                       
                         <li >
                             <Link className="list" to="/about">About</Link>
                         </li>
@@ -101,17 +104,15 @@ function Navbar() {
             <div className="content">            
                 
                 <li>
-                    <Link className="link" to="/"><li className="icon">
-                    <HomeIcon/>
-                    </li><p>Home</p></Link>
+                    <Link className="link" to="/">
+                    <HomeIcon className="icon"/>
+                    <p>Home</p></Link>
                 </li>
             </div>            
             <div className="content">                
                 <li>
-                    <Link className="link" to="/playlist">
-                    <li className="icon">
-                    <QueueMusicIcon/>
-                </li>
+                    <Link className="link" to="/playlist">                    
+                    <QueueMusicIcon className="icon"/>                
                         <p>Playlist</p></Link>
 
                 </li> 
@@ -119,9 +120,7 @@ function Navbar() {
             <div className="content">                
                 <li>
                     <Link className="link" to="/createPlaylist">
-                    <li className="icon">
-                    <PlaylistAddIcon/>
-                </li>
+                    <PlaylistAddIcon className="icon"/>
                         <p>Create Playlist</p></Link>
 
                 </li> 
@@ -129,19 +128,14 @@ function Navbar() {
             <div className="content">                
                 <li>
                     <Link className="link" to="/createPlaylist">
-                    <li className="icon">
-                    <UploadIcon/>
-                </li>
+                    <UploadIcon className="icon"/>
                         <p>Upload Music</p></Link>
 
                 </li> 
             </div>    
             <div className="content">                
                 <li>
-                    <Link className="link" to="/videoStreaming">
-                    {/* <li className="icon">
-                    <UploadIcon/>
-                </li> */}
+                    <Link className="link" to="/videoStreaming">                
                         <p>Video</p></Link>
 
                 </li> 
@@ -149,9 +143,7 @@ function Navbar() {
             <div className="content">                
                 <li>
                     <Link className="link" to="/logout">
-                    <li className="icon">
-                    <LogoutIcon/>
-                </li>
+                    <LogoutIcon className="icon"/>
                         <p>Logout</p></Link>
 
                 </li> 
