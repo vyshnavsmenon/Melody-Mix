@@ -173,6 +173,13 @@ function CreatePlaylist() {
     {
       setMusicName(e.target.value);
     }
+    function handleImage(e)
+    {
+      setFile(e.target.files[0]);
+    }
+    function handlesingerName(e){
+      setSingerName(e.target.value);
+    }
   return (    
       <div className='mainBody'>
       {
@@ -187,7 +194,6 @@ function CreatePlaylist() {
             <div className='checkBox'>Public<input type="checkbox" onChange={handlePublic}/></div>
             <div><button className='normal-btn' onClick={handleSubmit}>Upload Music</button></div>
             <input value={value} onChange={(e)=> {setValue(e.target.value)}}/>
-            <button className='normal-btn' onClick={handleStream}>Stream</button>
         </div>
       }
       <ToastContainer />
