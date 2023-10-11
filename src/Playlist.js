@@ -6,8 +6,28 @@ import { database } from './firebase';
 import './Playlist.css';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Skeleton from '@mui/material/Skeleton';
+import AudioPlayer from './AudioPlayer';
+import { useAppStore } from './store/appStore.js';
 
 function Playlist() {
+  const [ setAudioTracks] = useAppStore((state) => {
+    return [
+        state.setAudioTracks,
+    ]
+  });
+  const [ setCurrentTrack ] = useAppStore((state) => {
+    return [
+      state.setCurrentTrack,
+    ]
+  })
+  const [setCurrentTrackIndex] = useAppStore((state) => {
+    return [
+      state.setCurrentTrackIndex,
+    ]
+  })
+  const currentIndex = useAppStore((state) => state.currentTrackIndex);
+  const currentTrack = useAppStore((state) => state.currentTrack);
+  const audioTracks = useAppStore((state) => state.audioTracks);
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   const [cookie] = useCookies(["user-id"]);
@@ -51,6 +71,7 @@ function Playlist() {
         const response = await getDoc(doc(database, "Users", userid));
         if (response.exists()) {
           setData(response.data().audioFiles || []);
+
         } else {
           console.log("Document not found");
           setIsLoading(false);
@@ -119,65 +140,77 @@ function Playlist() {
     setIsClicked(!isClicked);
   }
 
+  function handleChangeMusic(music, index){
+    setAudioTracks(data.audioFiles || []);
+    setCurrentTrackIndex(index);
+    setCurrentTrack(music);
+  }
+
   return (
-    <div className='playlist'>
-      <div className='inner-div'>
-      {isLoading && <>
-          <Skeleton
-          sx={{ bgcolor: 'grey.900', margin: '1rem',}}
-          variant="rectangular"
-          width={810}
-          height={55}
-        />
-          <Skeleton
-          sx={{ bgcolor: 'grey.900', margin: '1rem' }}
-          variant="rectangular"
-          width={810}
-          height={55}
-        />
-        <Skeleton
-          sx={{ bgcolor: 'grey.900',margin: '1rem' }}
-          variant="rectangular"
-          width={810}
-          height={55}
-        />
-        <Skeleton
-          sx={{ bgcolor: 'grey.900', margin: '1rem' }}
-          variant="rectangular"
-          width={810}
-          height={55}
-        />
-        <Skeleton
-          sx={{ bgcolor: 'grey.900', margin: '1rem' }}
-          variant="rectangular"
-          width={810}
-          height={55}
-        />
-        <Skeleton
-          sx={{ bgcolor: 'grey.900', margin: '1rem'}}
-          variant="rectangular"
-          width={810}
-          height={55}
-        />
-        <Skeleton
-          sx={{ bgcolor: 'grey.900', margin: '1rem' }}
-          variant="rectangular"
-          width={810}
-          height={55}
-        />
-        </>}
-        {data.map((music, index) => (
-          <div className='audio' key={music.name}>
-            <p>{music.name}</p>
-            <audio ref={(el) => (audioRefArray.current[index] = el)} controls>
-              <source src={music.link} type="audio/mpeg" />
-              {/* Your browser does not support the audio element. */}
-            </audio>
-            <DeleteIcon onClick={() => handleDelete(music,index)} className={`delete ${isClicked[index] ? 'clicked' : 'notClicked'}`} />
+    <div className='home'>
+    <div className='inner-div'>
+    {isLoading && <>
+      <Skeleton
+      sx={{ bgcolor: 'grey.900', margin: '1rem',}}
+      variant="rectangular"
+      width={810}
+      height={55}
+    />
+      <Skeleton
+      sx={{ bgcolor: 'grey.900', margin: '1rem' }}
+      variant="rectangular"
+      width={810}
+      height={55}
+    />
+    <Skeleton
+      sx={{ bgcolor: 'grey.900',margin: '1rem' }}
+      variant="rectangular"
+      width={810}
+      height={55}
+    />
+    <Skeleton
+      sx={{ bgcolor: 'grey.900', margin: '1rem' }}
+      variant="rectangular"
+      width={810}
+      height={55}
+    />
+    <Skeleton
+      sx={{ bgcolor: 'grey.900', margin: '1rem' }}
+      variant="rectangular"
+      width={810}
+      height={55}
+    />
+    <Skeleton
+      sx={{ bgcolor: 'grey.900', margin: '1rem'}}
+      variant="rectangular"
+      width={810}
+      height={55}
+    />
+    <Skeleton
+      sx={{ bgcolor: 'grey.900', margin: '1rem' }}
+      variant="rectangular"
+      width={810}
+      height={55}
+    />
+    </>}
+
+      {data.map((music, index) => (
+        <div className='audio' key={index}> 
+          <div className='audio-left'>
+            <div className='image'>
+            <img src='https://imgs.search.brave.com/O_iJ5NPuPrmVtWMWyPOFE2aKXqkP0YXuTAgGGqTtFx8/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9kZWVw/bHlyaWNzLmluL2lt/YWdlcy9hbHRtZWRp/dW0vYW5qaS1tYW5p/a2t1LXB1cHB5XzY3/OC5qcGc'/>  
+            </div>
+            <div className='audio-contents' onClick={() => {handleChangeMusic(music,index)}}>
+            <h4>{music.name}</h4>
+            <p>shankar,shreya</p>
+            </div>
           </div>
-        ))}
-      </div>
+        <DeleteIcon onClick={() => handleDelete(music,index)} className={`delete ${isClicked[index] ? 'clicked' : 'notClicked'}`} />
+        </div>
+      ))}
     </div>
+   {/* <AudioPlayer /> */}
+  </div>
   );
 }
 

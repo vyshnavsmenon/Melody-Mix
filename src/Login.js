@@ -132,6 +132,7 @@ function Login() {
   setIsLoading(!isLoading);
   }
   return (
+    <>
       <div className='mainBody'>
         {(isLoading)? <Loader/> : <div className='smallBody'>
           <div className='heading'>Log in</div>
@@ -145,9 +146,12 @@ function Login() {
          </div>
         </div>}        
         <ToastContainer />
+        
       </div>
+    </>
+      
   )
 }
 
-export default Login
+export default Login;
 

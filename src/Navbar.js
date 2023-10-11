@@ -12,7 +12,8 @@ import UploadIcon from '@mui/icons-material/Upload';
 import MelodyMix from './MELODYMIX.png';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useAppStore } from "./store/appStore";
-import { useRef } from 'react'
+import { useRef } from 'react';
+import AudioPlayer from './AudioPlayer';
 
 function Navbar() {    
 
@@ -81,7 +82,11 @@ function Navbar() {
                     </ul>    
             </div>               
         </nav>
+        <div className="bottomMusic-container">
+        <AudioPlayer/>
+        </div>
         <div className="bottomNav-container">
+        <AudioPlayer/>
         <div className="bottomNav">
         <span><Link className="list" to="/"><HomeIcon className="bottom-icon"/></Link></span>
         <span><Link className="list" to="/playlist"><QueueMusicIcon className="bottom-icon"/></Link></span>                                

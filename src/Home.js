@@ -6,8 +6,28 @@ import { updateDoc, doc, getDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Skeleton from '@mui/material/Skeleton';
+import AudioPlayer from './AudioPlayer';
+import { useAppStore } from './store/appStore.js';
 
 function Home() {
+  const [ setAudioTracks] = useAppStore((state) => {
+    return [
+        state.setAudioTracks,
+    ]
+  });
+  const [ setCurrentTrack ] = useAppStore((state) => {
+    return [
+      state.setCurrentTrack,
+    ]
+  })
+  const [setCurrentTrackIndex] = useAppStore((state) => {
+    return [
+      state.setCurrentTrackIndex,
+    ]
+  })
+  const currentIndex = useAppStore((state) => state.currentTrackIndex);
+  const currentTrack = useAppStore((state) => state.currentTrack);
+  const audioTracks = useAppStore((state) => state.audioTracks);
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   const [cookie] = useCookies(["user-id"]);
@@ -32,6 +52,12 @@ function Home() {
         const response = await getDoc(doc(database, "Music", "dvGhfPODSRgcOYm6tYl7"));
         if (response.exists()) {
           setData(response.data().musicLink || []);
+          if(!currentTrack){
+            setAudioTracks(response.data().musicLink || []);
+            setCurrentTrack(response.data().musicLink[0]);
+            setCurrentTrackIndex(0);
+          }
+          console.log(audioTracks);
           setIsLoading(false);
         } else {
           console.log("Document not found");
@@ -54,17 +80,26 @@ function Home() {
 
       if (audioElement) {
         audioElement.addEventListener('ended', () => {
-          // Play the next audio when the current one ends
           setCurrentAudioIndex((prevIndex) => (prevIndex + 1) % data.length);
+          setCurrentTrackIndex(currentIndex + 1);
+          setCurrentTrack(audioTracks[currentIndex]);
+
         });
       }
     });
   }, [data]);
   
+  useEffect(() => {
+    console.log(currentTrack);
+  },[currentIndex])
 
   useEffect(() => {
     setIsClicked(new Array(data.length).fill(false));
   }, [data])
+
+  useEffect(() => {
+    console.log(audioTracks);
+  }, [audioTracks])
 
   useEffect(() => {
     const audioElement = audioRefArray.current[currentAudioIndex];
@@ -94,6 +129,12 @@ function Home() {
         updatedIcons[index] = !isClicked[index];
         setIsClicked(updatedIcons);
   }
+
+  function handleChangeMusic(music, index){
+    setCurrentTrack(music);
+    setCurrentTrackIndex(index);
+  }
+
 
     return (
       <div className='home'>
@@ -144,16 +185,21 @@ function Home() {
         </>}
 
           {data.map((music, index) => (
-            <div className='audio' key={music.link}>
-              <p>{music.name}</p>
-              <audio ref={(el) => (audioRefArray.current[index] = el)} controls>
-                <source src={music.link} type="audio/mpeg" />
-                Your browser does not support the audio element.
-              </audio>
+            <div className='audio' key={music.link}> 
+              <div className='audio-left'>
+                <div className='image'>
+                <img src='https://imgs.search.brave.com/O_iJ5NPuPrmVtWMWyPOFE2aKXqkP0YXuTAgGGqTtFx8/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9kZWVw/bHlyaWNzLmluL2lt/YWdlcy9hbHRtZWRp/dW0vYW5qaS1tYW5p/a2t1LXB1cHB5XzY3/OC5qcGc'/>  
+                </div>
+                <div className='audio-contents' onClick={() => {handleChangeMusic(music,index)}}>
+                <h4>{music.name}</h4>
+                <p>shankar,shreya</p>
+                </div>
+              </div>
             <FavoriteIcon onClick={() => handleFavorites(music,index)} className={`favorite ${isClicked[index] ? 'clicked' : 'notClicked'}`}/>
             </div>
           ))}
         </div>
+       {/* <AudioPlayer /> */}
       </div>
     )
 }

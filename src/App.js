@@ -8,6 +8,7 @@ import CreatePlaylist from './createPlaylist';
 import Logout from './Logout';
 import SearchResult from './SearchResult';
 import VideoStreaming from './VideoStreaming';
+import VideoReceiving from './VideoReceiving';
 import {  Routes, Route } from 'react-router-dom';
 
 
@@ -26,6 +27,7 @@ function App() {
             <Route path='/searchResult' element={<SearchResult  />}></Route>
             <Route path='/Melody-Mix' element={<Home />} />
             <Route path='/videoStreaming' element={<VideoStreaming />} />
+            <Route path='/videoReceiving/:id' element={<VideoReceiving/>} />
           </Routes>                   
     </>
   )
