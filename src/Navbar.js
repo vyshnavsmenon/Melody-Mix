@@ -13,6 +13,9 @@ import MelodyMix from './MELODYMIX.png';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useAppStore } from "./store/appStore";
 import { useRef } from 'react'
+import { doc, getDoc } from "firebase/firestore";
+import { useCookies } from "react-cookie";
+import { database } from "./firebase";
 
 function Navbar() {    
 
@@ -20,6 +23,8 @@ function Navbar() {
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false); 
     const [isClicked, setIsClicked] = useState(false);
+    const [imageUrl, setImageUrl] = useState();
+    const [cookie, setCookie] = useCookies(["user-id"]);
     const [search, changeTheValueOfSearch] = useAppStore((state) => {
         return [
             state.search,
@@ -41,6 +46,16 @@ function Navbar() {
         document.addEventListener("mousedown", handler);
 
     });
+
+    useEffect(() => {
+        async function fetchData(){
+            const userid = cookie['user-id'];
+            const response = await getDoc(doc(database, "Users", userid))
+            if(response.exists()){
+                setImageUrl(response.data().imageUrl);
+            }
+        }
+    })
 
     function toggleSidebar () {
         setIsOpen(!isOpen);

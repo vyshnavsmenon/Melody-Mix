@@ -49,7 +49,7 @@ function Profile() {
         { isLoading ? <Loader/> : 
             <div className='details'>
                 <h2>USER DETAILS</h2>
-                <div className='deatail-item'><img className='profilPicture' src={imageUrl}/></div>
+                <div className='deatail-item'><img className='profilePicture' src={imageUrl}/></div>
                 <div className='deatail-item'><label>Full Name : {fullName}</label><br></br></div>
                 <div className='deatail-item'><label>User Name : {username}</label><br></br></div>
                 <div className='deatail-item'><label>Email Id  : {emailid}</label><br></br></div>
