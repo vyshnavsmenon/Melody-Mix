@@ -11,7 +11,8 @@ import Loader from './Loader.js'
 
 function CreatePlaylist() {
     
-    const [cookies, setCookies] = useCookies(["user-id"]);  //ith entha engane kdduthe enn manasilayo..njn oru ooham pryam thazhekk vaa
+    const [cookies, setCookies] = useCookies(["user-id"]);
+    const [value, setValue] = useState(0); //ith entha engane kdduthe enn manasilayo..njn oru ooham pryam thazhekk vaa
     const [audioFile, setAudioFile] = useState();
     const [uploadProgress, setUploadProgress] = useState(0);
     const [downloadURL, setDownloadURL] = useState('');
@@ -192,6 +193,7 @@ function CreatePlaylist() {
             <div className='checkBox'>Private<input  type="checkbox" onChange={handlePrivate}/></div>  
             <div className='checkBox'>Public<input type="checkbox" onChange={handlePublic}/></div>
             <div><button className='normal-btn' onClick={handleSubmit}>Upload Music</button></div>
+            <input value={value} onChange={(e)=> {setValue(e.target.value)}}/>
         </div>
       }
       <ToastContainer />

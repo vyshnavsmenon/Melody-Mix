@@ -7,7 +7,12 @@
     height: auto;
     display: flex;
     justify-content: space-evenly;
-    flex-wrap: wrap;
+    flex-wrap: wrap;    
+}
+
+.heading1{
+    color: white;
+
 }
 
 .details{
@@ -31,6 +36,29 @@ label{
 .profilePicture{
     width: 8rem;    
     height: 8rem; 
-    padding: 2px;    
+    padding: 1px;       
     border-radius: 50%;
+}
+
+.heading{
+    border-bottom: 2px solid white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit.displaying{
+    width: 25rem;
+    height: 35rem;    
+    background: #1F1E1E;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    border-radius: 2rem;   
+    color: white; 
+}
+
+.edit.notDisplaying{
+    display: none;
 }

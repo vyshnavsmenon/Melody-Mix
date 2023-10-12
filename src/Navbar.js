@@ -16,6 +16,7 @@ import { useRef } from 'react'
 import { doc, getDoc } from "firebase/firestore";
 import { useCookies } from "react-cookie";
 import { database } from "./firebase";
+import AudioPlayer from './AudioPlayer';
 
 function Navbar() {    
 
@@ -90,10 +91,7 @@ function Navbar() {
                     }} ><SearchIcon/></div>
             </div> 
                 <div className="links">                    
-                    <ul className="unordered-list">
-                        {/* <li onClick={handleColor} className={`favorite ${isClicked ? 'clicked' : 'notClicked'}`}> 
-                            <FavoriteIcon/>
-                        </li> */}
+                    <ul className="unordered-list">                       
                         <li>
                             <Link className="list" to="/login">Log In</Link>
                         </li>
@@ -101,7 +99,7 @@ function Navbar() {
                             <Link className="list" to="/signup">Sign Up</Link>
                         </li> 
                         <li >
-                            <Link className="list" to="/profile">Profile</Link>
+                            <Link className="list" to="/profile"><img className="profile-picture" src={imageUrl}/></Link>
                         </li>                       
                         <li >
                             <Link className="list" to="/about">About</Link>
@@ -109,7 +107,11 @@ function Navbar() {
                     </ul>    
             </div>               
         </nav>
+        <div className="bottomMusic-container">
+        <AudioPlayer/>
+        </div>
         <div className="bottomNav-container">
+        <AudioPlayer/>
         <div className="bottomNav">
         <span><Link className="list" to="/"><HomeIcon className="bottom-icon"/></Link></span>
         <span><Link className="list" to="/playlist"><QueueMusicIcon className="bottom-icon"/></Link></span>                                
