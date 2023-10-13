@@ -2,25 +2,24 @@ import React, {useEffect, useState} from 'react';
 import './Profile.css';
 import Loader from './Loader.js';
 import { useNavigate } from 'react-router-dom';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc,updateDoc } from 'firebase/firestore';
 import { database } from './firebase';
 import { useCookies } from 'react-cookie';
 import EditIcon from '@mui/icons-material/Edit';
 import './Signup.css';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
 function Profile() {
     const [isLoading, setIsLoading] = useState(false);
-    const [fullName, setFullName] = useState();
-    const [username, setUserName] = useState();
-    const [emailid, setEmailId] = useState();
-    const [password, setPassword] = useState();
-    const [phone, setPhone] = useState()
-    const [file, setFile] = useState();
-    const [number, setNumber] = useState()
+    const [fullName, setFullName] = useState("");
+    const [username, setUserName] = useState("");
+    const [emailid, setEmailId] = useState("");  
+    const [number, setNumber] = useState(0)
     const [imageUrl, setImageUrl] = useState()
     const [cookie] = useCookies(["user-id"]);
     const navigate = useNavigate();
     const [isDisplayed, setIsDisplayed] = useState(false);
+    const [isDisplayed1, setIsDisplayed1] = useState(false);
 
     useEffect(() => {
         const userid = cookie['user-id'];
@@ -50,30 +49,42 @@ function Profile() {
 
         fetchData();
     }, [cookie, navigate])
-
-    function handleEdit(){
-        setIsDisplayed(!isDisplayed);
-    }
-    function readuserName(e)
-    {
-        setUserName(e.target.value);
-    }
-    function readEmailid(e)
-    {
-        setEmailId(e.target.value);
-    }
-    function readPassword(e)
-    {
-        setPassword(e.target.value);
-    }
+  
     function readFullName(e){
         setFullName(e.target.value);
     }
-    function readNumber(e){
-        setPhone(e.target.value);
+    function readUsername(e){
+        setUserName(e.target.value);
     }
-    function handleProfilePhoto(e){
-        setFile(e.target.files[0]);
+    function readEmailid(e){
+        setEmailId(e.target.value);
+    }
+    function readPhoneNo(e){
+        setNumber(e.target.value);
+    }
+    function handleEdit(){        
+        setIsDisplayed(!isDisplayed);                    
+    }  
+    function handleEditProfilePicture(){
+        setIsDisplayed1(!isDisplayed1);
+    }
+    async function handleSubmit(){
+        const userid = cookie['user-id'];               
+        await updateDoc(doc(database, 'Users', userid),{
+           emailid:emailid,
+           fullname:fullName,
+           phone:number,
+           username:username
+        })
+    }
+    function handleProfilePicture(e){
+        setImageUrl(e.target.files[0]);
+    }
+    async function UpdateProfilePicture(){
+        const userid = cookie['user-id'];
+        await updateDoc(doc(database, 'Users', userid),{
+            imageUrl : imageUrl
+        })
     }
   return (
     <div className='profile'>
@@ -83,7 +94,8 @@ function Profile() {
                     <h2>USER DETAILS</h2>   
                     <EditIcon onClick={handleEdit} />  
                 </div>           
-                <div className='deatail-item'><img className='profilePicture' src={imageUrl}/></div>
+                <div className='profilePhoto'><img className='profilePicture' src={imageUrl}/></div>
+                <div className='addPhoto'><AddAPhotoIcon onClick={handleEditProfilePicture}/></div>
                 <div className='deatail-item'><label>Full Name : {fullName}</label><br></br></div>
                 <div className='deatail-item'><label>User Name : {username}</label><br></br></div>
                 <div className='deatail-item'><label>Email Id  : {emailid}</label><br></br></div>
@@ -91,16 +103,17 @@ function Profile() {
             </div>
         }
         <div className={`edit ${ isDisplayed ? 'displaying' : 'notDisplaying'}`}>
-        <div className='heading1'>Edit</div>
-          <div><input className='bar1' type="text" placeholder='Full Name' onChange={readFullName}/></div>    
-          <div><input className='bar1' type="text" placeholder='Username' onChange={readuserName}/></div>
-          <div><input className='bar1' type="text" placeholder='Email id' onChange={readEmailid}/></div>
-          <div><input className='bar1' type="password" placeholder='Password' onChange={readPassword}/></div>
-          <div><input className='bar1' type="number" placeholder='Phone Number(optional)' onChange={readNumber}/></div>
-          <div><input type='file'placeholder='Upload your profile picture'  onChange={handleProfilePhoto}/></div>
-          {/* <div><button className='normal-btn' onClick={uploadingProfilePhoto}>Click here to Upload profile photo</button></div>
-          <div><button className='normal-btn' onClick={handleSignup}>Sign up</button></div> */}
-        </div>
+            <div><h2>Edit Profile</h2></div>
+            <div><input value={fullName} type='text' placeholder='Full Name' onChange={readFullName}/></div>
+            <div><input value={username} type='text' placeholder='Username' onChange={readUsername}/></div>
+            <div><input value={emailid}  type='text' placeholder='Email id' onChange={readEmailid}/></div>
+            <div><input value={number} type='text' placeholder='Phone Number' onChange={readPhoneNo}/></div>
+            <div><button onClick={handleSubmit}>Submit</button></div>
+        </div> 
+        <div className={`editProfilePicture ${ isDisplayed1 ? 'displaying' : 'notDisplaying'}`}>
+            <div><input className='profile1' type='file' onChange={handleProfilePicture}/></div>
+            <div><button onClick={UpdateProfilePicture}>Submit</button></div>
+        </div>         
     </div>
   )
 }
