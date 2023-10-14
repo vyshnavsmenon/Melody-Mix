@@ -58,8 +58,9 @@ import { createRef } from "react";
 export const useAppStore = create((set) => ({
   search: "",
   audioTracks: [],
-  currentTrack: null, // Initialize currentTrack as null
+  currentTrack: null, 
   currentTrackIndex: 0,
+  publicMusic: null,
       
   changeTheValueOfSearch: (value) => {
     set(produce((state) => {
@@ -84,6 +85,12 @@ export const useAppStore = create((set) => ({
       state.currentTrackIndex = index;
     }))
   },
+
+  setPublicMusic: (value) => {
+    set(produce((state) => {
+      state.publicMusic = value;
+    }))
+  }
 }));
 
   

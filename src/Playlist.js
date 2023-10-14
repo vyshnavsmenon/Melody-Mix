@@ -25,6 +25,11 @@ function Playlist() {
       state.setCurrentTrackIndex,
     ]
   })
+  const [setPublicMusic] = useAppStore((state) => {
+    return [
+      state.setPublicMusic,
+    ]
+  })
   const currentIndex = useAppStore((state) => state.currentTrackIndex);
   const currentTrack = useAppStore((state) => state.currentTrack);
   const audioTracks = useAppStore((state) => state.audioTracks);
@@ -141,6 +146,7 @@ function Playlist() {
 
   function handleChangeMusic(music, index){
     console.log(data);
+    setPublicMusic(false);
     setAudioTracks(data || []);
     setCurrentTrackIndex(index);
     setCurrentTrack(music);

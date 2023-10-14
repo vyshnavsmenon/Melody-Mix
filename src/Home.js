@@ -25,6 +25,12 @@ function Home() {
       state.setCurrentTrackIndex,
     ]
   })
+  const [setPublicMusic] = useAppStore((state) => {
+    return [
+      state.setPublicMusic,
+    ]
+  })
+
   const currentIndex = useAppStore((state) => state.currentTrackIndex);
   const currentTrack = useAppStore((state) => state.currentTrack);
   const audioTracks = useAppStore((state) => state.audioTracks);
@@ -53,6 +59,7 @@ function Home() {
         if (response.exists()) {
           setData(response.data().musicLink || []);
           if(!currentTrack){
+            setPublicMusic(true);
             setAudioTracks(response.data().musicLink || []);
             setCurrentTrack(response.data().musicLink[0]);
             setCurrentTrackIndex(0);
@@ -111,8 +118,6 @@ function Home() {
       console.log(currentAudio);
     }
   }, [currentAudioIndex]);
-
-  
 
   async function handleFavorites(music,index){
         const updatedIcons = [...isClicked];

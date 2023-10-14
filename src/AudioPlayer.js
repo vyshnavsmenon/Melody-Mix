@@ -11,6 +11,9 @@ import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import Replay10Icon from '@mui/icons-material/Replay10';
 import Forward10Icon from '@mui/icons-material/Forward10';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { database } from './firebase.js';
+import { updateDoc, doc, getDoc, addDoc, collection, } from 'firebase/firestore';
 
 function AudioPlayer() {
 
@@ -32,6 +35,7 @@ function AudioPlayer() {
   const audioTracks = useAppStore((state) => state.audioTracks);
   const currentIndex = useAppStore((state) => state.currentTrackIndex);
   const currentTrack = useAppStore((state) => state.currentTrack);
+  const publicMusic = useAppStore((state) => state.publicMusic);
   const [trackIndex, setTrackIndex] = useState(0);
   const [currentTrak, setCurrenttrack] = useState('');
   const [timeProgress, setTimeProgress] = useState(0);
@@ -56,8 +60,22 @@ function AudioPlayer() {
     }
   };
 
-  const togglePlayPause = () => {
+  const togglePlayPause = async() => {
     setIsPlaying((prev) => !prev);
+    if (publicMusic) {
+      console.log(currentTrack);
+      let views = currentTrack?.views + 1;
+      let updatedTrack = { ...currentTrack };
+      updatedTrack.views = views;
+      const updatedAudioTracks = [...audioTracks];
+      updatedAudioTracks[currentIndex] = updatedTrack;
+      setAudioTracks(updatedAudioTracks);
+      await updateDoc(doc(database, 'Music', "dvGhfPODSRgcOYm6tYl7"), {
+        musicLink: updatedAudioTracks,
+      });
+  
+      console.log("View count is incremented");
+    }
   };
 
   const playAnimationRef = useRef();
