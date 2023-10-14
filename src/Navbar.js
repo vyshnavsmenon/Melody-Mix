@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation  } from "react-router-dom";
 import './Navbar.css';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
@@ -16,7 +16,7 @@ import { useRef } from 'react';
 import AudioPlayer from './AudioPlayer';
 
 function Navbar() {    
-
+    const location = useLocation();
     const inputRef = useRef();
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false); 
@@ -85,17 +85,20 @@ function Navbar() {
                     </ul>    
             </div>               
         </nav>
+         {location.pathname !== '/login' && location.pathname !== '/signup' && (
         <div className="bottomMusic-container">
-        <AudioPlayer/>
+          <AudioPlayer />
         </div>
-        <div className="bottomNav-container">
-        <AudioPlayer/>
-        <div className="bottomNav">
-        <span><Link className="list" to="/"><HomeIcon className="bottom-icon"/></Link></span>
-        <span><Link className="list" to="/playlist"><QueueMusicIcon className="bottom-icon"/></Link></span>                                
-            <span><Link className="list" to="/createPlaylist"><UploadIcon className="bottom-icon"/></Link></span>  
-            <span><Link className="list" to="/logout"><LogoutIcon className="bottom-icon"/></Link></span>              
-        </div>
+      )}
+        <div className={`bottomNav-container ${location.pathname === '/login' || location.pathname === '/signup' ? 'custom-css-class' : ''}`}>
+        {location.pathname !== '/login' && location.pathname !== '/signup' && (
+        <AudioPlayer/> )};
+       <div className={`bottomNav`}>
+        <span><Link className="list" to="/"><HomeIcon className="bottom-icon" /></Link></span>
+        <span><Link className="list" to="/playlist"><QueueMusicIcon className="bottom-icon" /></Link></span>
+        <span><Link className="list" to="/createPlaylist"><UploadIcon className="bottom-icon" /></Link></span>
+        <span><Link className="list" to="/logout"><LogoutIcon className="bottom-icon" /></Link></span>
+       </div>
         </div>
           
             

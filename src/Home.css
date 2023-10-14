@@ -16,8 +16,9 @@
     width: 50rem;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: column;
+    margin-bottom: 5rem;
 }
 
 .audio{
@@ -112,6 +113,10 @@
 /* still no change btw home page il thanne aano nokkiye.. */
 
 @media (max-width: 768px) {
+
+    .home{
+        min-height: calc(100dvh - 70px);
+    }
 
     .image{
         margin-left: 0rem;

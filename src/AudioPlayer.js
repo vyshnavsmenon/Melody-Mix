@@ -10,6 +10,7 @@ import SkipNextIcon from '@mui/icons-material/SkipNext';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import Replay10Icon from '@mui/icons-material/Replay10';
 import Forward10Icon from '@mui/icons-material/Forward10';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 function AudioPlayer() {
 
@@ -39,16 +40,19 @@ function AudioPlayer() {
   const [volume, setVolume] = useState(60);
   const [muteVolume, setMuteVolume] = useState(false);
   const [count, setCount] = useState(0);
+  const nextRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   const audioRef = useRef();
   const progressBarRef = useRef();
-
+  const progressBarref = useRef();
 
   const onLoadedMetadata = () => {
     if(audioRef.current){
       const seconds = audioRef.current.duration;
       setDuration(seconds);
       progressBarRef.current.max = seconds;
+      progressBarref.current.max = seconds;
     }
   };
 
@@ -62,6 +66,11 @@ function AudioPlayer() {
     if(audioRef.current){
       const currentTime = audioRef.current.currentTime;
       setTimeProgress(currentTime);
+      progressBarref.current.value = currentTime;
+      progressBarref.current.style.setProperty(
+        '--range-progress',
+        `${(progressBarRef.current.value / duration) * 100}%`
+      );
       progressBarRef.current.value = currentTime;
       progressBarRef.current.style.setProperty(
         '--range-progress',
@@ -103,8 +112,15 @@ function AudioPlayer() {
   const handleProgressChange = () => {
     if (audioRef.current) {
       audioRef.current.currentTime = progressBarRef.current.value;
+      // progressBarref.current.value = progressBarRef.current.value;
     }
   };
+
+  const handleProgresschange = () => {
+    if(audioRef.current) {
+      audioRef.current.currentTime = progressBarref.current.value;
+    }
+  }
 
   const formatTime = (time) => {
     if (time && !isNaN(time)) {
@@ -122,10 +138,8 @@ function AudioPlayer() {
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.addEventListener('ended', () => {
-
-        console.log(audioTracks);
-        setCurrentTrack(audioTracks[currentIndex + 1]);
-        setCurrentTrackIndex(currentIndex + 1);
+        console.log("button Clicked");
+        nextRef.current.click();
       });
     }
   }, [audioRef]);
@@ -162,16 +176,25 @@ function AudioPlayer() {
 
 
   return (
-    <div className="audioPlayer"> 
+    <div className={`audioPlayer ${isOpen ? 'open' : ''}`} > 
      <audio ref={audioRef} src={currentTrack?.link}
        preload="metadata"
       onLoadedMetadata={onLoadedMetadata}
       ></audio>
       <div className='leftside'>
-        <div className='image'><img src='https://imgs.search.brave.com/O_iJ5NPuPrmVtWMWyPOFE2aKXqkP0YXuTAgGGqTtFx8/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9kZWVw/bHlyaWNzLmluL2lt/YWdlcy9hbHRtZWRp/dW0vYW5qaS1tYW5p/a2t1LXB1cHB5XzY3/OC5qcGc'/></div>
+        
+        <div className='image'><img src={currentTrack?.imageUrl}/></div>
         <div className='contents'>
           <h4>{currentTrack?.name}</h4>
-          <p>Shankar , Shreya</p>
+          <p>{currentTrack?.SingerName}</p>
+        </div>
+        <div className='Contents'>
+          <h4>{currentTrack?.name}</h4>
+          <p>{currentTrack?.SingerName}</p>
+          
+        </div>
+        <div className='close-icon' onClick={() => {setIsOpen(prev => !prev)}}>
+          <KeyboardArrowDownIcon/>
         </div>
       </div>
       <div className='center'>
@@ -182,7 +205,7 @@ function AudioPlayer() {
               {isPlaying ? <PauseIcon /> : <PlayArrowIcon className="play" />}
             </span>
             <span className="forward" onClick={skipForward}><Forward10Icon/></span>
-            <span className='skipNext' onClick={() => {handleNextMusic()}} ><SkipNextIcon/></span>
+            <span className='skipNext' ref={nextRef} onClick={() => {handleNextMusic()}} ><SkipNextIcon/></span>
         </div>
         <div className='center-bottom'>
           <div className="currentTime">{formatTime(timeProgress)}</div>
@@ -200,6 +223,38 @@ function AudioPlayer() {
           <div className="duration">{formatTime(duration)}</div>
         </div>
       </div>
+
+      <div className='Center'>
+        <div className='Center-top'>
+            <span className='SkipPrevious' onClick={() => {handlePreviousMusic()}}><SkipPreviousIcon style={{ fontSize: '2.4rem' }}/></span>
+            <span className="backward" onClick={skipBackward}><Replay10Icon /></span>
+            <span onClick={togglePlayPause} className="PlayPause">
+              {isPlaying ? <PauseIcon style={{ fontSize: '2rem' }}/> : <PlayArrowIcon style={{ fontSize: '2rem' }} />}
+            </span>
+            <span className="Forward" onClick={skipForward}><Forward10Icon/></span>
+            <span className='SkipNext' ref={nextRef} onClick={() => {handleNextMusic()}} ><SkipNextIcon style={{ fontSize: '2.4rem' }}/></span>
+            <div className='Close-icon' onClick={() => {setIsOpen(prev => !prev)}}>
+          <KeyboardArrowDownIcon style={{ fontSize: '2rem' }}/>
+
+        </div>
+        </div>
+        <div className='Center-bottom'>         
+          <div className='ProgressBar-container'>
+          <input
+           className='progressBar'
+            type="range"
+            ref={progressBarref}
+            defaultValue="0"
+            onChange={handleProgresschange}
+          />
+          </div>
+          <div className='durationTime'>
+          <div className="CurrentTime">{formatTime(timeProgress)}</div>
+          <div className="Duration">{formatTime(duration)}</div>
+          </div>
+        </div>
+      </div>
+
       <div className='rightside'>
       <VolumeDownIcon/>
         <input

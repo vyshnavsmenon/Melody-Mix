@@ -144,15 +144,24 @@ input:placeholder-shown{
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 140px;
+    height: 150px;
+    z-index: 999999;
+}
+
+.custom-css-class{
+    display: none;
+    position: fixed;
+    margin-bottom: -1.2rem;
+    width: 100%;
+    height: 90px;
     z-index: 999999;
 }
 
 .bottomNav{
+    margin-top: -1.5rem ;
     position: sticky;
     width: 100%;
     height: 70px;
-    /* border-radius: 2rem; */
     background-color: #1F1E1E;
     color: white;
     display: flex;
@@ -166,7 +175,7 @@ input:placeholder-shown{
     bottom: 0;
     width: 100%;
     height: 80px;
-    z-index: 999999;
+    z-index: 99;
 }
 
 .bottomNav span{
@@ -223,8 +232,6 @@ input:placeholder-shown{
 
     .menu{
         display: none;
-        padding-bottom: 2.5rem;
-        padding-right: 1rem;
     }
 
     .logo{

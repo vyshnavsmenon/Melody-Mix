@@ -188,11 +188,11 @@ function Home() {
             <div className='audio' key={music.link}> 
               <div className='audio-left'>
                 <div className='image'>
-                <img src='https://imgs.search.brave.com/O_iJ5NPuPrmVtWMWyPOFE2aKXqkP0YXuTAgGGqTtFx8/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9kZWVw/bHlyaWNzLmluL2lt/YWdlcy9hbHRtZWRp/dW0vYW5qaS1tYW5p/a2t1LXB1cHB5XzY3/OC5qcGc'/>  
+                <img src={music.imageUrl}/>  
                 </div>
                 <div className='audio-contents' onClick={() => {handleChangeMusic(music,index)}}>
                 <h4>{music.name}</h4>
-                <p>shankar,shreya</p>
+                <p>{music.SingerName}</p>
                 </div>
               </div>
             <FavoriteIcon onClick={() => handleFavorites(music,index)} className={`favorite ${isClicked[index] ? 'clicked' : 'notClicked'}`}/>
