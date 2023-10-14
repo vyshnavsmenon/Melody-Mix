@@ -7,7 +7,12 @@
     height: auto;
     display: flex;
     justify-content: space-evenly;
-    flex-wrap: wrap;
+    flex-wrap: wrap;    
+}
+
+.heading1{
+    color: white;
+
 }
 
 .details{
@@ -24,6 +29,81 @@
     margin-bottom: 10px;       
 }
 
+/* .profilePhoto{
+    
+} */
+
+.addPhoto{
+    position: absolute;
+    transform: translate(-50%, -50%);        
+    color: white !important;
+    padding-left: 215px;
+    z-index: 9999;    
+}
+
+
+
 label{
     font-weight: bold;         
+}
+
+.profilePicture{
+    width: 8rem;    
+    height: 8rem; 
+    padding: 1px;       
+    border-radius: 50%;
+    position: relative;    
+}
+
+.heading{
+    border-bottom: 2px solid white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit.displaying{
+    width: 25rem;
+    height: 35rem;    
+    background: #1F1E1E;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    border-radius: 1rem;   
+    color: white; 
+}
+
+.edit.notDisplaying{
+    display: none;
+}
+
+.editProfilePicture.displaying{
+    width: 16rem;
+    height: 9rem;
+    background-color: #2A2A2A;
+    margin-top: 13rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.editProfilePicture.notDisplaying{
+    display: none;
+}
+
+.profile1{
+    padding-left: 107px;
+}
+
+.edit input{
+    width: 15rem;
+    height: 2.8rem;
+    padding-left: 1rem;
+    margin-top: 1rem;
+    background-color: transparent;
+    color: white;
+    border: 1px solid #EE3240;
+    border-radius: 1rem;
 }

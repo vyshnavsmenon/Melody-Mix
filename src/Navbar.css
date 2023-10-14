@@ -197,6 +197,13 @@ input:placeholder-shown{
     transform: translateY(-4px);
 }
 
+.profile-picture{
+    width: 3rem;
+    height: 3rem;    
+    border-radius: 50%;  
+    background-color: red;      
+}
+
 @media (max-width: 768px){
 
     .NavBar{

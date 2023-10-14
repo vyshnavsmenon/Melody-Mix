@@ -8,7 +8,6 @@ import CreatePlaylist from './createPlaylist';
 import Logout from './Logout';
 import SearchResult from './SearchResult';
 import VideoStreaming from './VideoStreaming';
-import VideoReceiving from './VideoReceiving';
 import {  Routes, Route } from 'react-router-dom';
 import Profile from './Profile';
 

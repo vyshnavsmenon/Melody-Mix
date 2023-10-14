@@ -12,7 +12,10 @@ import UploadIcon from '@mui/icons-material/Upload';
 import MelodyMix from './MELODYMIX.png';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useAppStore } from "./store/appStore";
-import { useRef } from 'react';
+import { useRef } from 'react'
+import { doc, getDoc } from "firebase/firestore";
+import { useCookies } from "react-cookie";
+import { database } from "./firebase";
 import AudioPlayer from './AudioPlayer';
 
 function Navbar() {    
@@ -21,6 +24,8 @@ function Navbar() {
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false); 
     const [isClicked, setIsClicked] = useState(false);
+    const [imageUrl, setImageUrl] = useState();
+    const [cookie, setCookie] = useCookies(["user-id"]);
     const [search, changeTheValueOfSearch] = useAppStore((state) => {
         return [
             state.search,
@@ -41,7 +46,27 @@ function Navbar() {
 
         document.addEventListener("mousedown", handler);
 
-    });
+    return () => {
+        // Cleanup the event listener when component is unmounted
+        document.removeEventListener("mousedown", handler);
+    };
+}, [isOpen]);
+    
+
+    useEffect(() => {
+        async function fetchData(){
+            try{
+                const userid = cookie['user-id'];
+                const response = await getDoc(doc(database, "Users", userid))
+                if(response.exists()){
+                    setImageUrl(response.data().imageUrl);
+                }    
+            }  
+            catch(error){                
+                console.log("Error fetching data: ", error);
+            }
+        }
+    })
 
     function toggleSidebar () {
         setIsOpen(!isOpen);
@@ -66,10 +91,7 @@ function Navbar() {
                     }} ><SearchIcon/></div>
             </div> 
                 <div className="links">                    
-                    <ul className="unordered-list">
-                        {/* <li onClick={handleColor} className={`favorite ${isClicked ? 'clicked' : 'notClicked'}`}> 
-                            <FavoriteIcon/>
-                        </li> */}
+                    <ul className="unordered-list">                       
                         <li>
                             <Link className="list" to="/login">Log In</Link>
                         </li>
@@ -77,7 +99,7 @@ function Navbar() {
                             <Link className="list" to="/signup">Sign Up</Link>
                         </li> 
                         <li >
-                            <Link className="list" to="/profile">Profile</Link>
+                            <Link className="list" to="/profile"><img className="profile-picture" src={imageUrl}/></Link>
                         </li>                       
                         <li >
                             <Link className="list" to="/about">About</Link>

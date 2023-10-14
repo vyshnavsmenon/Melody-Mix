@@ -2,19 +2,24 @@ import React, {useEffect, useState} from 'react';
 import './Profile.css';
 import Loader from './Loader.js';
 import { useNavigate } from 'react-router-dom';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc,updateDoc } from 'firebase/firestore';
 import { database } from './firebase';
 import { useCookies } from 'react-cookie';
+import EditIcon from '@mui/icons-material/Edit';
+import './Signup.css';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
 function Profile() {
     const [isLoading, setIsLoading] = useState(false);
-    const [fullName, setFullName] = useState();
-    const [username, setUserName] = useState();
-    const [emailid, setEmailId] = useState();
-    const [number, setNumber] = useState()
+    const [fullName, setFullName] = useState("");
+    const [username, setUserName] = useState("");
+    const [emailid, setEmailId] = useState("");  
+    const [number, setNumber] = useState(0)
     const [imageUrl, setImageUrl] = useState()
     const [cookie] = useCookies(["user-id"]);
     const navigate = useNavigate();
+    const [isDisplayed, setIsDisplayed] = useState(false);
+    const [isDisplayed1, setIsDisplayed1] = useState(false);
 
     useEffect(() => {
         const userid = cookie['user-id'];
@@ -44,18 +49,71 @@ function Profile() {
 
         fetchData();
     }, [cookie, navigate])
+  
+    function readFullName(e){
+        setFullName(e.target.value);
+    }
+    function readUsername(e){
+        setUserName(e.target.value);
+    }
+    function readEmailid(e){
+        setEmailId(e.target.value);
+    }
+    function readPhoneNo(e){
+        setNumber(e.target.value);
+    }
+    function handleEdit(){        
+        setIsDisplayed(!isDisplayed);                    
+    }  
+    function handleEditProfilePicture(){
+        setIsDisplayed1(!isDisplayed1);
+    }
+    async function handleSubmit(){
+        const userid = cookie['user-id'];               
+        await updateDoc(doc(database, 'Users', userid),{
+           emailid:emailid,
+           fullname:fullName,
+           phone:number,
+           username:username
+        })
+    }
+    function handleProfilePicture(e){
+        setImageUrl(e.target.files[0]);
+    }
+    async function UpdateProfilePicture(){
+        const userid = cookie['user-id'];
+        await updateDoc(doc(database, 'Users', userid),{
+            imageUrl : imageUrl
+        })
+    }
   return (
     <div className='profile'>
         { isLoading ? <Loader/> : 
             <div className='details'>
-                <h2>USER DETAILS</h2>
-                <div className='deatail-item'><img className='profilPicture' src={imageUrl}/></div>
+                <div className='heading'>
+                    <h2>USER DETAILS</h2>   
+                    <EditIcon onClick={handleEdit} />  
+                </div>           
+                <div className='profilePhoto'><img className='profilePicture' src={imageUrl}/></div>
+                <div className='addPhoto'><AddAPhotoIcon onClick={handleEditProfilePicture}/></div>
                 <div className='deatail-item'><label>Full Name : {fullName}</label><br></br></div>
                 <div className='deatail-item'><label>User Name : {username}</label><br></br></div>
                 <div className='deatail-item'><label>Email Id  : {emailid}</label><br></br></div>
-                <div className='deatail-item'><label>Phone No  : {number}</label><br></br></div>
+                <div className='deatail-item'><label>Phone No  : {number}</label><br></br></div>                
             </div>
         }
+        <div className={`edit ${ isDisplayed ? 'displaying' : 'notDisplaying'}`}>
+            <div><h2>Edit Profile</h2></div>
+            <div><input value={fullName} type='text' placeholder='Full Name' onChange={readFullName}/></div>
+            <div><input value={username} type='text' placeholder='Username' onChange={readUsername}/></div>
+            <div><input value={emailid}  type='text' placeholder='Email id' onChange={readEmailid}/></div>
+            <div><input value={number} type='text' placeholder='Phone Number' onChange={readPhoneNo}/></div>
+            <div><button onClick={handleSubmit}>Submit</button></div>
+        </div> 
+        <div className={`editProfilePicture ${ isDisplayed1 ? 'displaying' : 'notDisplaying'}`}>
+            <div><input className='profile1' type='file' onChange={handleProfilePicture}/></div>
+            <div><button onClick={UpdateProfilePicture}>Submit</button></div>
+        </div>         
     </div>
   )
 }
