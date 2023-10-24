@@ -210,7 +210,7 @@ function Home() {
        <h1 className='small_heading'>Trending Songs</h1>
        <div className='audio_carousel_container' > 
           {data.map((music, index) => (
-            <div className='single_audio_container'>
+            <div className='single_audio_container'  onClick={() => {handleChangeMusic(music,index)}}>
                <div className='single_audio_image'><img src={music.imageUrl} alt={music.name}/> </div>
                <div className='single_audio_container_on_hover'>
                 <h4 className='single_audio_h4'>{music.name}</h4>
@@ -223,7 +223,7 @@ function Home() {
            <h1 className='small_heading'>English Songs</h1>
        <div className='audio_carousel_container' > 
           {englishSong.map((music, index) => (
-            <div className='single_audio_container'>
+            <div className='single_audio_container' onClick={() => {handleChangeMusic(music,index)}}>
             <div className='single_audio_image'><img src={music.imageUrl} alt={music.name}/> </div>
             <div className='single_audio_container_on_hover'>
              <h4 className='single_audio_h4'>{music.name}</h4>
@@ -249,7 +249,7 @@ function Home() {
            <h1 className='small_heading'>Malayalam Songs</h1>
        <div className='audio_carousel_container' > 
           {malayalamSong.map((music, index) => (
-            <div className='single_audio_container'>
+            <div className='single_audio_container'  onClick={() => {handleChangeMusic(music,index)}}>
             <div className='single_audio_image'><img src={music.imageUrl} alt={music.name}/> </div>
             <div className='single_audio_container_on_hover'>
              <h4 className='single_audio_h4'>{music.name}</h4>
