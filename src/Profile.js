@@ -7,10 +7,17 @@ import { database } from './firebase';
 import { useCookies } from 'react-cookie';
 import EditIcon from '@mui/icons-material/Edit';
 import './Signup.css';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import CircularProgress, {
+    CircularProgressProps,
+  } from '@mui/material/CircularProgress';
 
 function Profile() {
     const [isLoading, setIsLoading] = useState(false);
+    const [isImageUploading, setIsImageUploading] = useState(false);
     const [fullName, setFullName] = useState("");
     const [username, setUserName] = useState("");
     const [emailid, setEmailId] = useState("");  
@@ -18,8 +25,11 @@ function Profile() {
     const [imageUrl, setImageUrl] = useState()
     const [cookie] = useCookies(["user-id"]);
     const navigate = useNavigate();
+    const storage = getStorage();
+    const [imageFile, setImageFile] = useState(null);
     const [isDisplayed, setIsDisplayed] = useState(false);
     const [isDisplayed1, setIsDisplayed1] = useState(false);
+    const [uploadProgress, setUploadProgress] = useState(false);
 
     useEffect(() => {
         const userid = cookie['user-id'];
@@ -75,21 +85,56 @@ function Profile() {
            fullname:fullName,
            phone:number,
            username:username
-        })
+        }).then(() => {
+            console.log("user updated..");
+            setIsDisplayed(!isDisplayed);
+        }).catch((err) => {console.error(err)});
     }
     function handleProfilePicture(e){
-        setImageUrl(e.target.files[0]);
+        setImageFile(e.target.files[0]);
     }
     async function UpdateProfilePicture(){
         const userid = cookie['user-id'];
-        await updateDoc(doc(database, 'Users', userid),{
-            imageUrl : imageUrl
-        })
+        const storageRef = ref(storage, 'image/' + imageFile.name);
+          const uploadTask = uploadBytesResumable(storageRef, imageFile);
+            setIsImageUploading(prev => !prev);
+          uploadTask.on(
+            'state_changed',
+            (snapshot) => {
+              const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              setUploadProgress(progress); 
+            },
+            (error) => {  
+              toast.error(error.message);
+            },
+            () => {
+              getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+                  setImageUrl(downloadURL);
+                  await updateDoc(doc(database, 'Users', userid),{
+                    imageUrl : downloadURL
+                }).then(() => {
+                    setIsImageUploading(prev => !prev);
+                    setIsDisplayed1(prev => !prev);
+                }).catch((err) => {console.log(err)});
+                });
+            }
+          );
+        
     }
+
+    if(isImageUploading){
+        return(
+          <div className='loader-container'>
+            <h4>Image is uploading...</h4>
+            <CircularProgress variant="determinate" value={uploadProgress} size={120} style={{ color: '#EE3240' }}/>
+          </div>
+        );
+      }
+
   return (
     <div className='profile'>
         { isLoading ? <Loader/> : 
-            <div className='details'>
+            <div className={`details ${ isDisplayed ? 'notDisplaying' : 'displaying'}`}>
                 <div className='heading'>
                     <h2>USER DETAILS</h2>   
                     <EditIcon onClick={handleEdit} />  

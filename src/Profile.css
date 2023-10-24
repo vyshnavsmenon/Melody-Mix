@@ -4,10 +4,12 @@
     color: white;
     width: 100%;
     min-height: calc(100dvh - 90px);
-    height: auto;
+    height: 140vh;
     display: flex;
     justify-content: space-evenly;
-    flex-wrap: wrap;    
+    flex-wrap: wrap;
+    padding-top: 8rem;  
+    position: relative;  
 }
 
 .heading1{
@@ -16,6 +18,7 @@
 }
 
 .details{
+  margin-top: 5rem;
   width: 50%;
   height: 30rem;
   background-color: #121212;
@@ -27,6 +30,10 @@
 
 .detail-item{
     margin-bottom: 10px;       
+}
+
+.details.notDisplaying{
+    display: none;
 }
 
 /* .profilePhoto{
@@ -79,6 +86,7 @@ label{
 }
 
 .editProfilePicture.displaying{
+    position: absolute;
     width: 16rem;
     height: 9rem;
     background-color: #2A2A2A;

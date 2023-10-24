@@ -97,13 +97,13 @@ function Navbar() {
                         </li>
                         <li >
                             <Link className="list" to="/signup">Sign Up</Link>
-                        </li> 
-                        <li >
-                            <Link className="list" to="/profile"><img className="profile-picture" src={imageUrl}/></Link>
-                        </li>                       
+                        </li>                      
                         <li >
                             <Link className="list" to="/about">About</Link>
                         </li>
+                        <li >
+                            <Link className="list" to="/profile"><img className="profile-picture" src={imageUrl}/></Link>
+                        </li>  
                     </ul>    
             </div>               
         </nav>
@@ -155,13 +155,6 @@ function Navbar() {
                     <Link className="link" to="/createPlaylist">
                     <UploadIcon className="icon"/>
                         <p>Upload Music</p></Link>
-
-                </li> 
-            </div>    
-            <div className="content">                
-                <li>
-                    <Link className="link" to="/videoStreaming">                
-                        <p>Video</p></Link>
 
                 </li> 
             </div>    

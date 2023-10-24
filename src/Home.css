@@ -1,3 +1,24 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.audio_carousel_container::-webkit-scrollbar {
+    width: 0rem;     
+    height: 2px;          /* width of the entire scrollbar */
+  }
+  
+.audio_carousel_container::-webkit-scrollbar-track {
+    background: transparent;      /* color of the tracking area */
+  }
+  
+.audio_carousel_container::-webkit-scrollbar-thumb {
+    background-color: #EE3240;    /* color of the scroll thumb */
+    border-radius: 2px;  
+    height: 2px;     /* roundness of the scroll thumb */  /* creates padding around scroll thumb */
+  }
+
 .home{
     font-family: 'Poppins';
     background-color: #121212;
@@ -13,12 +34,107 @@
 }
 
 .inner-div{
-    width: 50rem;
+    width: 65rem;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
     margin-bottom: 5rem;
+    
+}
+
+.audioContainer{
+    max-width: 100vw;
+    width: 100%;
+    height: 11rem;
+    background: blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.audio_carousel_container{
+    max-width: 100%;
+    height: 14rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    overflow-y: scroll;
+    overflow-x: unset;
+    white-space: nowrap; 
+}
+
+.single_audio_container{
+    /* height: 11rem; */
+    min-width: 10rem; /* Adjusted width */
+    margin-right: 1rem; /* Adjusted margin */
+    display: inline-block; /* Display inline to prevent wrapping */
+    position: relative;
+    transition: all 0.2s ease-in-out;
+}
+
+.single_audio_h4{
+    width: 6rem;
+    white-space: nowrap;         /* Prevent text from wrapping */
+    overflow: hidden;           /* Hide overflowing text */
+    text-overflow: ellipsis;
+}
+
+.single_audio_p{
+    font-size: 10px;
+    width: 6rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: rgb(143, 137, 137);
+}
+
+.single_audio_container_on_hover{
+    position: absolute;
+    max-width: 6rem;
+    height: 11rem;
+    white-space: nowrap;         /* Prevent text from wrapping */
+    overflow: hidden;           /* Hide overflowing text */
+    text-overflow: ellipsis;
+    top: 10rem;
+    opacity: 0;
+    display: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.single_audio_container:hover{
+    scale: 1.2;
+    overflow: hidden;
+}
+
+.single_audio_container:hover .single_audio_image{
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+.single_audio_container:hover .single_audio_container_on_hover{
+    margin-left: 1rem;
+    opacity: 1;
+    top: 7rem;
+    display: block;
+    font-size: 12px;
+}
+
+.small_heading{
+    margin-top: 1rem;
+    font-size: 16px;
+    margin-left: -58rem;
+    margin-bottom: 0.6rem;
+    border-radius: 1rem;
+}
+
+.single_audio_container img{
+    all:unset;
+    object-fit: fit;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 0.5rem;
 }
 
 .audio{
@@ -103,19 +219,14 @@
     }
 }
 
-/* .image{
-    width: 100%;
-    height: 585px;
-    background-color: white;
-    color: black;    
-} */
-
-/* still no change btw home page il thanne aano nokkiye.. */
-
 @media (max-width: 768px) {
 
     .home{
         min-height: calc(100dvh - 70px);
+    }
+
+    .small_heading{
+        margin-left: -17rem;
     }
 
     .image{

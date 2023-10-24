@@ -85,6 +85,17 @@ img{
     z-index: 9999; 
 }
 
+.profile-picture{
+    width: 2rem;
+    height: 2rem;
+    background-color: white;
+
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
 
 .melody-mix{
     color: white !important;

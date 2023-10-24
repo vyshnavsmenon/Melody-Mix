@@ -13,7 +13,7 @@ import CircularProgress, {
 } from '@mui/material/CircularProgress';
 
 function CreatePlaylist() {
-    
+    const filename = Math.floor(Date.now() / 1000);
     const [cookies, setCookies] = useCookies(["user-id"]);
     const [view, setView] = useState(0); //ith entha engane kdduthe enn manasilayo..njn oru ooham pryam thazhekk vaa
     const [audioFile, setAudioFile] = useState();
@@ -27,6 +27,7 @@ function CreatePlaylist() {
     const [privateMusic, setPrivateMusic] = useState(false);
     const [musicName, setMusicName] = useState("") 
     const [singerName, setSingerName] = useState();
+    const [language, setLanguage] = useState();
     const navigate = useNavigate(); 
     const [isLoading, setIsLoading] = useState(false);
     const [file, setFile] = useState();
@@ -52,7 +53,7 @@ function CreatePlaylist() {
     async function handleSubmit()
     {
         // setIsLoading(!isLoading);
-        const storageRef = ref(storage, `/files/${file}`);
+        const storageRef = ref(storage, `/files/${filename}`);
       setIsImageUploading(prev => !prev);
     // Upload the image
     const uploadTask = uploadBytesResumable(storageRef, file);
@@ -151,7 +152,7 @@ function CreatePlaylist() {
                   let userData = await getDoc(doc(database, 'Users', userid));
                   console.log(userData.data());
                   const docRef = await updateDoc(doc(database, 'Users', userid), {
-                    audioFiles: [...userData.data().audioFiles, {link: downloadURL, name: musicName, imageUrl: url, SingerName: singerName}] 
+                    audioFiles: [...userData.data().audioFiles, {link: downloadURL, name: musicName, imageUrl: url, SingerName: singerName, language: language}] 
                   });
                 });
             }
@@ -216,6 +217,7 @@ function CreatePlaylist() {
           <div className='audioFile'><p className='choose'>Choose an Image</p><input className='file' type="file" accept="image/*" onChange={handleImage}/></div>
             <div><input className='nameOfMusic' type="text" placeholder='Name of Music' onChange={handlemusicName}/></div>
             <div><input className='nameOfMusic' type="text" placeholder='Name of the Singer' onChange={handlesingerName}/></div>
+            <div><input className='nameOfMusic' type="text" placeholder='Language' onChange={(e) => {setLanguage(e.target.value)}}/></div>
             <div className='checkBox'>Private<input  type="checkbox" onChange={handlePrivate}/></div>  
             <div className='checkBox'>Public<input type="checkbox" onChange={handlePublic}/></div>
             <div><button className='normal-btn' onClick={handleSubmit}>Upload Music</button></div>            

@@ -6,10 +6,14 @@ import { updateDoc, doc, getDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Skeleton from '@mui/material/Skeleton';
-import AudioPlayer from './AudioPlayer';
 import { useAppStore } from './store/appStore.js';
 
 function Home() {
+
+
+  const [englishSong, setEnglishSong] = useState([]);
+  const [hindiSong, setHindiSong] = useState([]);
+  const [malayalamSong, setMalayalamSong] = useState([]);
   const [ setAudioTracks] = useAppStore((state) => {
     return [
         state.setAudioTracks,
@@ -58,6 +62,11 @@ function Home() {
         const response = await getDoc(doc(database, "Music", "dvGhfPODSRgcOYm6tYl7"));
         if (response.exists()) {
           setData(response.data().musicLink || []);
+          setEnglishSong(data.filter((music) => music.language.toLowerCase() === "English".toLowerCase()));
+          setHindiSong(data.filter((music) => music.language.toLowerCase() === "Hindi".toLowerCase()));
+          setMalayalamSong(data.filter((music) => music.language.toLowerCase() === "Malayalam".toLowerCase()));
+
+          console.log(englishSong);
           if(!currentTrack){
             setPublicMusic(true);
             setAudioTracks(response.data().musicLink || []);
@@ -188,24 +197,74 @@ function Home() {
           height={55}
         />
         </>}
+        {/* <div className='audio_carousel_container'> 
+        {data && data.map((music,index) => {
 
+            <div className='single_audio_container'>
+              <img src={music.imageUrl}/>
+              <p>{music.SingerName}</p>
+            </div>
+
+        })}
+        </div> */}
+       <h1 className='small_heading'>Trending Songs</h1>
+       <div className='audio_carousel_container' > 
           {data.map((music, index) => (
-            <div className='audio' key={music.link}> 
-              <div className='audio-left'>
-                <div className='image'>
-                <img src={music.imageUrl}/>  
-                </div>
-                <div className='audio-contents' onClick={() => {handleChangeMusic(music,index)}}>
-                <h4>{music.name}</h4>
-                <p>{music.SingerName}</p>
-                </div>
-              </div>
-            <FavoriteIcon onClick={() => handleFavorites(music,index)} className={`favorite ${isClicked[index] ? 'clicked' : 'notClicked'}`}/>
+            <div className='single_audio_container'>
+               <div className='single_audio_image'><img src={music.imageUrl} alt={music.name}/> </div>
+               <div className='single_audio_container_on_hover'>
+                <h4 className='single_audio_h4'>{music.name}</h4>
+                <p className='single_audio_p'>{music.SingerName}</p>
+               </div>
             </div>
           ))}
+           </div>
+
+           <h1 className='small_heading'>English Songs</h1>
+       <div className='audio_carousel_container' > 
+          {englishSong.map((music, index) => (
+            <div className='single_audio_container'>
+            <div className='single_audio_image'><img src={music.imageUrl} alt={music.name}/> </div>
+            <div className='single_audio_container_on_hover'>
+             <h4 className='single_audio_h4'>{music.name}</h4>
+             <p className='single_audio_p'>{music.SingerName}</p>
+            </div>
+         </div>
+          ))}
+           </div>
+
+           <h1 className='small_heading'>hindi Songs</h1>
+       <div className='audio_carousel_container' > 
+          {hindiSong.map((music, index) => (
+            <div className='single_audio_container'>
+            <div className='single_audio_image'><img src={music.imageUrl} alt={music.name}/> </div>
+            <div className='single_audio_container_on_hover'>
+             <h4 className='single_audio_h4'>{music.name}</h4>
+             <p className='single_audio_p'>{music.SingerName}</p>
+            </div>
+         </div>
+          ))}
+           </div>
+
+           <h1 className='small_heading'>Malayalam Songs</h1>
+       <div className='audio_carousel_container' > 
+          {malayalamSong.map((music, index) => (
+            <div className='single_audio_container'>
+            <div className='single_audio_image'><img src={music.imageUrl} alt={music.name}/> </div>
+            <div className='single_audio_container_on_hover'>
+             <h4 className='single_audio_h4'>{music.name}</h4>
+             <p className='single_audio_p'>{music.SingerName}</p>
+            </div>
+         </div>
+          ))}
+           </div>
+
         </div>
        {/* <AudioPlayer /> */}
-      </div>
+       </div>
+       
+      // </div>
+      
     )
 }
 
