@@ -135,7 +135,7 @@ function Login() {
     <>
       <div className='mainBody'>
         {(isLoading)? <Loader/> : <div className='smallBody'>
-          <div className='heading'>Log in</div>
+          <div className='Heading'>Log in</div>
           <div><input className='bar' type="text" placeholder='email' onChange={readEmailid}/></div>
           <div><input className='bar' type="password" placeholder='password' onChange={readPassword}/></div>
           <div><button className='normal-btn' onClick={handleLogIn}>log in</button></div>

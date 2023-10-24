@@ -26,6 +26,20 @@
     box-shadow: 0px 0px 55px -8px rgba(238,50,64,1);
 }
 
+.audio-contents h4{
+    max-width: 10rem;
+    white-space: nowrap;         /* Prevent text from wrapping */
+    overflow: hidden;           /* Hide overflowing text */
+    text-overflow: ellipsis;
+}
+
+.audio-contents p{
+    max-width: 10rem;
+    white-space: nowrap;         /* Prevent text from wrapping */
+    overflow: hidden;           /* Hide overflowing text */
+    text-overflow: ellipsis;
+}
+
 .audio:hover .favorite.clicked {
     color: white;
   }

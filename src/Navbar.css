@@ -85,17 +85,6 @@ img{
     z-index: 9999; 
 }
 
-.profile-picture{
-    width: 2rem;
-    height: 2rem;
-    background-color: white;
-
-    img{
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-    }
-}
 
 .melody-mix{
     color: white !important;
@@ -209,10 +198,15 @@ input:placeholder-shown{
 }
 
 .profile-picture{
-    width: 3rem;
-    height: 3rem;    
+    width: 4rem;
+    height: 4rem;
+    padding: 0;
     border-radius: 50%;  
-    background-color: red;      
+    outline: none;  
+}
+
+.user-profile{
+    display: none;
 }
 
 @media (max-width: 768px){
@@ -288,4 +282,17 @@ input:placeholder-shown{
     .bottomMusic-container{
         display: none;
     }
+
+    .user-profile{
+        display: block;
+        padding-left: 2rem;
+    }
+
+    .profile-picture1{
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        padding: 0;
+    }
+   
 }

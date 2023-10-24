@@ -128,6 +128,25 @@ function Home() {
     }
   }, [currentAudioIndex]);
 
+  useEffect(() => {
+    const userid = cookie['user-id'];
+    if(userid){
+      async function fetchUserData() {
+      
+        const userData = await getDoc(doc(database, 'Users', userid));
+        const user = userData.data();
+        const user1 = user ? user.audioFiles || [] : [];
+    
+        const initialIsClicked = data.map((x) =>
+          user1.some((fav) => fav.name === x.name)
+        );
+        setIsClicked(initialIsClicked);
+      }
+    
+      fetchUserData();
+    }
+  }, [cookie, data]);
+
   async function handleFavorites(music,index){
         const updatedIcons = [...isClicked];
         updatedIcons[index] = !isClicked[index];
@@ -137,7 +156,7 @@ function Home() {
         let userData = await getDoc(doc(database, 'Users', userid));
         console.log(userData.data());
         await updateDoc(doc(database, 'Users', userid), {
-        audioFiles: [...userData.data().audioFiles, {link: music.link, name: music.name}] })
+        audioFiles: [...userData.data().audioFiles, {link: music.link, name: music.name, SingerName: music.SingerName, imageUrl: music.imageUrl}] });
         setIsClicked(!isClicked);
 
         updatedIcons[index] = !isClicked[index];
@@ -211,7 +230,11 @@ function Home() {
        <div className='audio_carousel_container' > 
           {data.map((music, index) => (
             <div className='single_audio_container'  onClick={() => {handleChangeMusic(music,index)}}>
-               <div className='single_audio_image'><img src={music.imageUrl} alt={music.name}/> </div>
+               <div className='single_audio_image'><img src={music.imageUrl} alt={music.name}/>
+               <div className='single_audio_image_icon'>
+               <FavoriteIcon onClick={() => handleFavorites(music,index)} className={`favorite ${isClicked[index] ? 'clicked' : 'notClicked'}`}/>
+               </div>
+               </div>
                <div className='single_audio_container_on_hover'>
                 <h4 className='single_audio_h4'>{music.name}</h4>
                 <p className='single_audio_p'>{music.SingerName}</p>

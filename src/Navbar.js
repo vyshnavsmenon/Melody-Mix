@@ -12,11 +12,12 @@ import UploadIcon from '@mui/icons-material/Upload';
 import MelodyMix from './MELODYMIX.png';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useAppStore } from "./store/appStore";
-import { useRef } from 'react'
+import { useRef } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { useCookies } from "react-cookie";
 import { database } from "./firebase";
 import AudioPlayer from './AudioPlayer';
+import InfoIcon from '@mui/icons-material/Info';
 
 function Navbar() {    
     const location = useLocation();
@@ -57,15 +58,19 @@ function Navbar() {
         async function fetchData(){
             try{
                 const userid = cookie['user-id'];
-                const response = await getDoc(doc(database, "Users", userid))
-                if(response.exists()){
-                    setImageUrl(response.data().imageUrl);
-                }    
+                if(userid){
+                    const response = await getDoc(doc(database, "Users", userid))
+                    if(response.exists()){
+                        setImageUrl(response.data().imageUrl);
+                    } 
+                }
             }  
             catch(error){                
-                console.log("Error fetching data: ", error);
+                // console.log("Error fetching data: ", error);
             }
         }
+
+        fetchData();
     })
 
     function toggleSidebar () {
@@ -89,6 +94,9 @@ function Navbar() {
                 <div className="searchicon" onClick={()=> {changeTheValueOfSearch(inputRef.current.value);
                         navigate("/searchResult");
                     }} ><SearchIcon/></div>
+                <div className="user-profile">
+                <Link to="/profile"><img  className="profile-picture1"  src={imageUrl}/></Link>
+                </div>
             </div> 
                 <div className="links">                    
                     <ul className="unordered-list">                       
@@ -97,13 +105,10 @@ function Navbar() {
                         </li>
                         <li >
                             <Link className="list" to="/signup">Sign Up</Link>
-                        </li>                      
+                        </li> 
                         <li >
-                            <Link className="list" to="/about">About</Link>
-                        </li>
-                        <li >
-                            <Link className="list" to="/profile"><img className="profile-picture" src={imageUrl}/></Link>
-                        </li>  
+                            <Link to="/profile"><img  className="profile-picture"  src={imageUrl}/></Link>
+                        </li>                                               
                     </ul>    
             </div>               
         </nav>
@@ -120,13 +125,14 @@ function Navbar() {
         <span><Link className="list" to="/playlist"><QueueMusicIcon className="bottom-icon" /></Link></span>
         <span><Link className="list" to="/createPlaylist"><UploadIcon className="bottom-icon" /></Link></span>
         <span><Link className="list" to="/logout"><LogoutIcon className="bottom-icon" /></Link></span>
+        <span><Link className="list" to="/about"><InfoIcon className="bottom-icon" /></Link></span>
        </div>
         </div>
           
             
         <div className={`sidebar ${isOpen ? 'open' : ''}`} ref={sidebarRef}>
         <ul className="unordered" >
-            <div className="content">            
+            <div className="content1">            
                 
                 <li>
                     <Link className="link" to="/">
@@ -157,12 +163,20 @@ function Navbar() {
                         <p>Upload Music</p></Link>
 
                 </li> 
-            </div>    
+            </div>                 
             <div className="content">                
                 <li>
                     <Link className="link" to="/logout">
                     <LogoutIcon className="icon"/>
                         <p>Logout</p></Link>
+
+                </li> 
+            </div>   
+            <div className="content">                
+                <li>
+                    <Link className="link" to="/about"> 
+                    <InfoIcon className="icon"/>
+                        <p>About</p></Link>
 
                 </li> 
             </div>    
@@ -173,4 +187,5 @@ function Navbar() {
 }
  
 export default Navbar;
+
 

@@ -65,6 +65,12 @@
     white-space: nowrap; 
 }
 
+.single_audio_image_icon{
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+}
+
 .single_audio_container{
     /* height: 11rem; */
     min-width: 10rem; /* Adjusted width */

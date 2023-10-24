@@ -75,6 +75,7 @@ function Playlist() {
         const response = await getDoc(doc(database, "Users", userid));
         if (response.exists()) {
           setData(response.data().audioFiles || []);
+          console.log(response.data().audioFiles);
 
         } else {
           console.log("Document not found");

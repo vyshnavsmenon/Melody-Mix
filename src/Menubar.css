@@ -42,6 +42,29 @@
     transition: all 0.3s ease-in;
 }
 
+.content1{
+    margin-top: -3rem;
+    width: 225px;
+    height: 4rem;
+    display: flex;
+    padding-left: 2rem;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    transition: all 0.3s ease-in;
+
+}
+
+.content1 p{
+    margin-left: 1rem;
+}
+
+.content1:hover{
+    background-color: #EE3240;
+    border-radius: 1rem;
+    color: white;
+}
+
 .content:hover {
     background-color: #EE3240;
     border-radius: 1rem;
@@ -51,3 +74,5 @@
 .content p{
     margin-left: 1rem;
 }
+
+
