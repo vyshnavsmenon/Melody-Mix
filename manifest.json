@@ -10,12 +10,12 @@
     {
       "src": "MelodyMix.png",
       "type": "image/png",
-      "sizes": "100x100"
+      "sizes": "192x192"
     },
     {
       "src": "MelodyMix.png",
       "type": "image/png",
-      "sizes": "100x100"
+      "sizes": "512x512"
     }
   ],
   "start_url": ".",
