@@ -110,7 +110,7 @@ function CreatePlaylist() {
                   console.log(musicData.data());
                   console.log("music image link : ", imageUrl);
                   await updateDoc(doc(database, 'Music', "dvGhfPODSRgcOYm6tYl7"), { 
-                    musicLink: [...musicData.data().musicLink, {link: downloadURL , name: musicName, imageUrl: url, SingerName: singerName, views: 0}]
+                    musicLink: [...musicData.data().musicLink, {link: downloadURL , name: musicName, imageUrl: url, SingerName: singerName, views: 0, language: language}]
                   });    
                   }); 
                 });
@@ -186,7 +186,10 @@ function CreatePlaylist() {
     }
     function handlesingerName(e){
       setSingerName(e.target.value);
-    }    
+    }  
+    function handleLanguage(e) {
+      setLanguage(e.target.value);
+    }  
 
   if(isImageUploading){
     return(
@@ -217,7 +220,7 @@ function CreatePlaylist() {
           <div className='audioFile'><p className='choose'>Choose an Image</p><input className='file' type="file" accept="image/*" onChange={handleImage}/></div>
             <div><input className='nameOfMusic' type="text" placeholder='Name of Music' onChange={handlemusicName}/></div>
             <div><input className='nameOfMusic' type="text" placeholder='Name of the Singer' onChange={handlesingerName}/></div>
-            <div><input className='nameOfMusic' type="text" placeholder='Language' onChange={(e) => {setLanguage(e.target.value)}}/></div>
+            <div><input className='nameOfMusic' type="text" placeholder='Language' onChange={handleLanguage}/></div>
             <div className='checkBox'>Private<input  type="checkbox" onChange={handlePrivate}/></div>  
             <div className='checkBox'>Public<input type="checkbox" onChange={handlePublic}/></div>
             <div><button className='normal-btn' onClick={handleSubmit}>Upload Music</button></div>            

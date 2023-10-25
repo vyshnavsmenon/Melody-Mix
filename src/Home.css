@@ -61,7 +61,7 @@
     display: flex;
     align-items: center;
     overflow-y: scroll;
-    overflow-x: unset;
+    overflow-x: fillunset;
     white-space: nowrap; 
 }
 
@@ -73,7 +73,8 @@
 
 .single_audio_container{
     /* height: 11rem; */
-    min-width: 10rem; /* Adjusted width */
+    min-width: 10rem;
+    max-width: 10rem; /* Adjusted width */
     margin-right: 1rem; /* Adjusted margin */
     display: inline-block; /* Display inline to prevent wrapping */
     position: relative;
@@ -134,9 +135,20 @@
     border-radius: 1rem;
 }
 
+/* .single_audio_image{
+    height: 100%;
+    width: auto;
+} */
+
+/* .single_audio_image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+} */
+
 .single_audio_container img{
     all:unset;
-    object-fit: fit;
+    object-fit: cover;
     width: 100%;
     height: 100%;
     overflow: hidden;

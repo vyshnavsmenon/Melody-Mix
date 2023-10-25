@@ -14,6 +14,7 @@ function Home() {
   const [englishSong, setEnglishSong] = useState([]);
   const [hindiSong, setHindiSong] = useState([]);
   const [malayalamSong, setMalayalamSong] = useState([]);
+  const [tamilSong, setTamilSong] = useState([]);
   const [ setAudioTracks] = useAppStore((state) => {
     return [
         state.setAudioTracks,
@@ -65,6 +66,7 @@ function Home() {
           setEnglishSong(data.filter((music) => music.language.toLowerCase() === "English".toLowerCase()));
           setHindiSong(data.filter((music) => music.language.toLowerCase() === "Hindi".toLowerCase()));
           setMalayalamSong(data.filter((music) => music.language.toLowerCase() === "Malayalam".toLowerCase()));
+          setTamilSong(data.filter((music) => music.language.toLowerCase() === "Tamil".toLowerCase()));
 
           console.log(englishSong);
           if(!currentTrack){
@@ -245,9 +247,12 @@ function Home() {
 
            <h1 className='small_heading'>English Songs</h1>
        <div className='audio_carousel_container' > 
-          {englishSong.map((music, index) => (
+          {data.filter((music) => music.language?.toLowerCase() === "English".toLowerCase()).map((music, index) => (
             <div className='single_audio_container' onClick={() => {handleChangeMusic(music,index)}}>
-            <div className='single_audio_image'><img src={music.imageUrl} alt={music.name}/> </div>
+            <div className='single_audio_image'><img src={music.imageUrl} alt={music.name}/> 
+            <div className='single_audio_image_icon'>
+               <FavoriteIcon onClick={() => handleFavorites(music,index)} className={`favorite ${isClicked[index] ? 'clicked' : 'notClicked'}`}/>
+               </div></div>
             <div className='single_audio_container_on_hover'>
              <h4 className='single_audio_h4'>{music.name}</h4>
              <p className='single_audio_p'>{music.SingerName}</p>
@@ -256,11 +261,14 @@ function Home() {
           ))}
            </div>
 
-           <h1 className='small_heading'>hindi Songs</h1>
+           <h1 className='small_heading'>Hindi Songs</h1>
        <div className='audio_carousel_container' > 
-          {hindiSong.map((music, index) => (
+          {data.filter((music) => music.language?.toLowerCase() === "Hindi".toLowerCase()).map((music, index) => (
             <div className='single_audio_container'>
-            <div className='single_audio_image'><img src={music.imageUrl} alt={music.name}/> </div>
+            <div className='single_audio_image'><img src={music.imageUrl} alt={music.name}/> 
+            <div className='single_audio_image_icon'>
+               <FavoriteIcon onClick={() => handleFavorites(music,index)} className={`favorite ${isClicked[index] ? 'clicked' : 'notClicked'}`}/>
+               </div></div>
             <div className='single_audio_container_on_hover'>
              <h4 className='single_audio_h4'>{music.name}</h4>
              <p className='single_audio_p'>{music.SingerName}</p>
@@ -271,9 +279,28 @@ function Home() {
 
            <h1 className='small_heading'>Malayalam Songs</h1>
        <div className='audio_carousel_container' > 
-          {malayalamSong.map((music, index) => (
+          {data.filter((music) => music.language?.toLowerCase() === "Malayalam".toLowerCase()).map((music, index) => (
             <div className='single_audio_container'  onClick={() => {handleChangeMusic(music,index)}}>
-            <div className='single_audio_image'><img src={music.imageUrl} alt={music.name}/> </div>
+            <div className='single_audio_image'><img src={music.imageUrl} alt={music.name}/> 
+            <div className='single_audio_image_icon'>
+               <FavoriteIcon onClick={() => handleFavorites(music,index)} className={`favorite ${isClicked[index] ? 'clicked' : 'notClicked'}`}/>
+               </div></div>
+            <div className='single_audio_container_on_hover'>
+             <h4 className='single_audio_h4'>{music.name}</h4>
+             <p className='single_audio_p'>{music.SingerName}</p>
+            </div>
+         </div>
+          ))}
+           </div>
+
+           <h1 className='small_heading'>Tamil Songs</h1>
+       <div className='audio_carousel_container' > 
+          {data.filter((music) => music.language?.toLowerCase() === "Tamil".toLowerCase()).map((music, index) => (
+            <div className='single_audio_container'  onClick={() => {handleChangeMusic(music,index)}}>
+            <div className='single_audio_image'><img src={music.imageUrl} alt={music.name}/> 
+            <div className='single_audio_image_icon'>
+               <FavoriteIcon onClick={() => handleFavorites(music,index)} className={`favorite ${isClicked[index] ? 'clicked' : 'notClicked'}`}/>
+               </div></div>
             <div className='single_audio_container_on_hover'>
              <h4 className='single_audio_h4'>{music.name}</h4>
              <p className='single_audio_p'>{music.SingerName}</p>
