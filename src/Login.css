@@ -1,10 +1,12 @@
 .mainBody{
     width: 100%;
-    height: calc(100dvh - 90px);
+    min-height: calc(100dvh - 90px);
+    height: auto;
     background: #121212 !important;
     display: flex;
     align-items: center;
-    justify-content: center;    
+    justify-content: flex-start;  
+    flex-direction: column;  
 }
 
 .smallBody{

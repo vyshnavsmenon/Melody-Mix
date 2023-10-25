@@ -22,7 +22,7 @@ function Profile() {
     const [username, setUserName] = useState("");
     const [emailid, setEmailId] = useState("");  
     const [number, setNumber] = useState(0)
-    const [imageUrl, setImageUrl] = useState()
+    const [imageUrl, setImageUrl] = useState('https://i.pinimg.com/474x/81/8a/1b/818a1b89a57c2ee0fb7619b95e11aebd.jpg')
     const [cookie] = useCookies(["user-id"]);
     const navigate = useNavigate();
     const storage = getStorage();

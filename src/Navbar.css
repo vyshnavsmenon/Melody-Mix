@@ -198,9 +198,10 @@ input:placeholder-shown{
 }
 
 .profile-picture{
-    width: 4rem;
-    height: 4rem;
+    width: 3rem;
+    height: 3rem;
     padding: 0;
+    margin-top: 1rem;
     border-radius: 50%;  
     outline: none;  
 }
@@ -247,8 +248,10 @@ input:placeholder-shown{
     }
 
     .logo{
-        width: 65px;
-        height: 100px;
+        margin-left: 2rem;
+        margin-bottom: 0.5rem;
+        width: 45px;
+        height: 45px;
         display: flex;
         justify-content: center;
         align-items: center; 

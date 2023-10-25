@@ -25,7 +25,7 @@ function Navbar() {
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false); 
     const [isClicked, setIsClicked] = useState(false);
-    const [imageUrl, setImageUrl] = useState();
+    const [imageUrl, setImageUrl] = useState('https://i.pinimg.com/474x/81/8a/1b/818a1b89a57c2ee0fb7619b95e11aebd.jpg');
     const [cookie, setCookie] = useCookies(["user-id"]);
     const [search, changeTheValueOfSearch] = useAppStore((state) => {
         return [

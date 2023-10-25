@@ -4,11 +4,11 @@
     color: white;
     width: 100%;
     min-height: calc(100dvh - 90px);
-    height: 140vh;
+    height: 100vh;
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    padding-top: 8rem;  
+    padding-top: 3rem;  
     position: relative;  
 }
 
@@ -18,7 +18,7 @@
 }
 
 .details{
-  margin-top: 5rem;
+  margin-top: 0rem;
   width: 50%;
   height: 30rem;
   background-color: #121212;
