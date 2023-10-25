@@ -6,15 +6,19 @@ import aim from './aim.png';
 import headset from './headsetCompressed_Transparent.png'
 import warning from './warning.png'
 import playlist from './playlist.png'
+import { useNavigate } from 'react-router-dom';
 
 function About() {
+
+  const navigate = useNavigate();
+
   return (
     <div className='about'>
       <div className='about_first_section'>
         <div className='about_first_section_left'>
           <h1 className='about_heading'>MELODY MIX</h1><br></br>
           <h4 className='about_tagLine'>Where music is all about you</h4>
-          <button className='about_button'>Start Listening</button>
+          <button onClick={() => {navigate('/')}} className='about_button'>Start Listening</button>
         </div>
         <div className='about_first_section_right'>
           <img src={image} />
@@ -57,7 +61,7 @@ function About() {
           <h4 className='fourth_h4'>We invite you to be a part of our growing community of music enthusiasts. It's time to <br/>
         enjoy music the way you want to, without interruptions. Explore, create, and share <br/>
         your musical journey with us.</h4>
-        <button className='fourth_button'>Join Now</button>
+        <button className='fourth_button' onClick={() => {navigate('/')}}>Join Now</button>
           </div>
           
         <img className='fourth_section_image' src={boyPlayingKeyboard}/>
