@@ -102,7 +102,12 @@
 
 @media (max-width: 768px) {
     .mainBody{
-        padding-top: -10rem;
         height: 120vh;
+        overflow: hidden;
+    }
+
+    .small-Body{
+        margin-top: 2rem;
+        width: 100%;
     }
 }
