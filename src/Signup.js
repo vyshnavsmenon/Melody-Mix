@@ -17,6 +17,8 @@ import {
 import Loader from './Loader';
 import { ref,  uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "./firebase";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Signup() {
   const [fullname, setFullName] = useState();
@@ -89,6 +91,10 @@ function Signup() {
   }
   async function handleSignup()
   {
+    if(!(Phone && fullname && password && emailid && username && file)){
+      toast.error("All fields are mandatory");
+      return;
+    }
     setIsLoading(!isLoading);
     createUserWithEmailAndPassword(auth,emailid,password)
       .then(async (response) => {
@@ -121,16 +127,17 @@ function Signup() {
   return (
     <div className='mainBody'>
       {(isLoading) ? <Loader/> : <div className='smallBody'>    
-          <div className='heading'>Sign in</div>
+          <div className='Heading'>Sign in</div>
           <div><input className='bar1' type="text" placeholder='Full Name' onChange={readFullName}/></div>    
           <div><input className='bar1' type="text" placeholder='Username' onChange={readuserName}/></div>
           <div><input className='bar1' type="text" placeholder='Email id' onChange={readEmailid}/></div>
           <div><input className='bar1' type="password" placeholder='Password' onChange={readPassword}/></div>
           <div><input className='bar1' type="number" placeholder='Phone Number(optional)' onChange={readNumber}/></div>
           <div><input type='file'placeholder='Upload your profile picture'  onChange={handleProfilePhoto}/></div>
-          <div><button className='normal-btn' onClick={uploadingProfilePhoto}>Click here to Upload profile photo</button></div>
+          <div><button className='normal-btn' onClick={uploadingProfilePhoto}>Upload image</button></div>
           <div><button className='normal-btn' onClick={handleSignup}>Sign up</button></div>          
       </div>}
+      <ToastContainer />
     </div>
   )
 }

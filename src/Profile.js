@@ -79,6 +79,11 @@ function Profile() {
         setIsDisplayed1(!isDisplayed1);
     }
     async function handleSubmit(){
+        if(!(fullName && username && emailid && number)){
+            toast.error("All fields are mandatory");
+            console.log(fullName, username, emailid, number);
+            return;
+        }
         const userid = cookie['user-id'];               
         await updateDoc(doc(database, 'Users', userid),{
            emailid:emailid,
@@ -158,7 +163,8 @@ function Profile() {
         <div className={`editProfilePicture ${ isDisplayed1 ? 'displaying' : 'notDisplaying'}`}>
             <div><input className='profile1' type='file' onChange={handleProfilePicture}/></div>
             <div><button onClick={UpdateProfilePicture}>Submit</button></div>
-        </div>         
+        </div>  
+        <ToastContainer/>       
     </div>
   )
 }

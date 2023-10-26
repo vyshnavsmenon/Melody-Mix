@@ -228,7 +228,7 @@ function Home() {
 
         })}
         </div> */}
-       <h1 className='small_heading'>Trending Songs</h1>
+       <h1 className='small_heading_top'>Recently Played or Added</h1>
        <div className='audio_carousel_container' > 
           {data.map((music, index) => (
             <div className='single_audio_container'  onClick={() => {handleChangeMusic(music,index)}}>
@@ -277,7 +277,7 @@ function Home() {
           ))}
            </div>
 
-           <h1 className='small_heading'>Malayalam Songs</h1>
+           <h1 className='small_heading_malayalam'>Malayalam Songs</h1>
        <div className='audio_carousel_container' > 
           {data.filter((music) => music.language?.toLowerCase() === "Malayalam".toLowerCase()).map((music, index) => (
             <div className='single_audio_container'  onClick={() => {handleChangeMusic(music,index)}}>

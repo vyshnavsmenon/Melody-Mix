@@ -129,22 +129,28 @@
 
 .small_heading{
     margin-top: 1rem;
-    font-size: 16px;
-    margin-left: -58rem;
+    font-size: 22px;
+    margin-left: -54.5rem;
     margin-bottom: 0.6rem;
     border-radius: 1rem;
 }
 
-/* .single_audio_image{
-    height: 100%;
-    width: auto;
-} */
+.small_heading_malayalam{
+    margin-top: 1rem;
+    font-size: 22px;
+    margin-left: -51rem;
+    margin-bottom: 0.6rem;
+    border-radius: 1rem;
+}
 
-/* .single_audio_image img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-} */
+.small_heading_top{
+    margin-top: 1rem;
+    font-size: 22px;
+    margin-left: -47.5rem;
+    margin-bottom: 0.6rem;
+    border-radius: 1rem;
+}
+
 
 .single_audio_container img{
     all:unset;
@@ -238,6 +244,21 @@
 }
 
 @media (max-width: 768px) {
+
+    .small_heading_top{
+        font-size: 18px;
+        margin-left: -9rem;
+    }
+
+    .small_heading{
+        font-size: 18px;
+        margin-left: -1rem;
+    }
+
+    .small_heading_malayalam{
+        font-size: 18px;
+        margin-left: -14rem;
+    }
 
     .home{
         min-height: calc(100dvh - 70px);

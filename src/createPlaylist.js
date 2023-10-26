@@ -52,6 +52,10 @@ function CreatePlaylist() {
     }
     async function handleSubmit()
     {
+      if(!(audioFile && singerName && musicName && language && file)){
+        toast.error("All fields are mandatory");
+        return;
+      }
         // setIsLoading(!isLoading);
         const storageRef = ref(storage, `/files/${filename}`);
       setIsImageUploading(prev => !prev);

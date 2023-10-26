@@ -19,8 +19,8 @@ import image from './google_prev_ui.png';
 
 
 function Login() {
-  const [emailid, setemailId]  = useState();
-  const [password, setPassword] = useState();
+  const [emailid, setemailId]  = useState(null);
+  const [password, setPassword] = useState(null);
   const [isClicked1, setIsClicked1] = useState(false);
   const [isClicked2, setIsClicked2] = useState(false);
   const [isClicked3, setIsClicked3] = useState(false);
@@ -45,7 +45,19 @@ function Login() {
   }
   function handleLogIn() {
     setIsLoading(!isLoading);
-    setIsClicked1(!isClicked1);    
+    setIsClicked1(!isClicked1);   
+    
+    if(emailid === null){
+      setIsLoading(prev => !prev);
+      toast.error("Enter an email id");
+      return;
+    }
+
+    if(password === null){
+      setIsLoading(prev => !prev);
+      toast.error("Enter password");
+      return;
+    }
   
     signInWithEmailAndPassword(auth, emailid, password)
       .then((response) => {
@@ -65,17 +77,17 @@ function Login() {
               setCookie("user-id", docId, { path: "/" });
               navigate('/');
             } else { 
-              setIsLoading((prev) => {return !prev});
+              setIsLoading(prev => !prev);
               toast.error('User not found'); 
             }
           })
           .catch((error) => {
-            setIsLoading((prev) => {return !prev});
+            setIsLoading(prev => !prev);
             toast.error(error.message);
           });
       })
       .catch((error) => {
-        setIsLoading((prev) => {return !prev});
+        setIsLoading(prev => !prev);
         toast.error(error.message);
       });
       setIsLoading(!isLoading);
@@ -134,14 +146,14 @@ function Login() {
   return (
     <>
       <div className='mainBody'>
-        {(isLoading)? <Loader/> : <div className='smallBody'>
+        {(isLoading)? <div className='loading_container'><Loader/></div> : <div className='smallBody'>
           <div className='Heading'>Log in</div>
           <div><input className='bar' type="text" placeholder='email' onChange={readEmailid}/></div>
           <div><input className='bar' type="password" placeholder='password' onChange={readPassword}/></div>
           <div><button className='normal-btn' onClick={handleLogIn}>log in</button></div>
           <div><button className='google-btn' onClick={SignInWithGoogle}><div className='google'><img src={image} alt="google logo"/></div><p>continue with Google</p></button></div>
          <div className='botton-grp'>
-           <div>Already a user ? <a className="sign-in" onClick={handleSignin}>sign in</a></div>
+           <div>Not a user ? <a className="sign-in" onClick={handleSignin}>sign in</a></div>
           <div><a className="forgot-password" onClick={handleForgotPassword}>Forgot Password</a></div>          
          </div>
         </div>}        
