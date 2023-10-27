@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Melody-Mix/static/css/main.726da36a.css",
-    "main.js": "/Melody-Mix/static/js/main.2ff23718.js",
+    "main.css": "/Melody-Mix/static/css/main.b4568d05.css",
+    "main.js": "/Melody-Mix/static/js/main.79312d13.js",
     "static/media/boyPlaying.png": "/Melody-Mix/static/media/boyPlaying.230c5574ac24f0ea2a65.png",
     "static/media/aim.png": "/Melody-Mix/static/media/aim.097795e261496d9f4256.png",
     "static/media/playlist.png": "/Melody-Mix/static/media/playlist.fd1e3a82c3667b1708b3.png",
@@ -10,11 +10,11 @@
     "static/media/boyHeadset.png": "/Melody-Mix/static/media/boyHeadset.da32857f333b1c848d4f.png",
     "static/media/google_prev_ui.png": "/Melody-Mix/static/media/google_prev_ui.edff1e04f0277333dbc7.png",
     "index.html": "/Melody-Mix/index.html",
-    "main.726da36a.css.map": "/Melody-Mix/static/css/main.726da36a.css.map",
-    "main.2ff23718.js.map": "/Melody-Mix/static/js/main.2ff23718.js.map"
+    "main.b4568d05.css.map": "/Melody-Mix/static/css/main.b4568d05.css.map",
+    "main.79312d13.js.map": "/Melody-Mix/static/js/main.79312d13.js.map"
   },
   "entrypoints": [
-    "static/css/main.726da36a.css",
-    "static/js/main.2ff23718.js"
+    "static/css/main.b4568d05.css",
+    "static/js/main.79312d13.js"
   ]
 }
