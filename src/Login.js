@@ -153,7 +153,7 @@ function Login() {
           <div><button className='normal-btn' onClick={handleLogIn}>log in</button></div>
           <div><button className='google-btn' onClick={SignInWithGoogle}><div className='google'><img src={image} alt="google logo"/></div><p>continue with Google</p></button></div>
          <div className='botton-grp'>
-           <div>Not a user ? <a className="sign-in" onClick={handleSignin}>sign in</a></div>
+           <div>Not a user ? <a className="sign-in" onClick={handleSignin}>sign up</a></div>
           <div><a className="forgot-password" onClick={handleForgotPassword}>Forgot Password</a></div>          
          </div>
         </div>}        

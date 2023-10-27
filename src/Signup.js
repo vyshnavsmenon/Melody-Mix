@@ -36,7 +36,7 @@ function Signup() {
   // ...
 
   function uploadingProfilePhoto(){
-    setIsLoading(!isLoading);
+    // setIsLoading(!isLoading);
         const storageRef = ref(storage, `/files/${file}`);
 
     // Upload the image
@@ -56,13 +56,14 @@ function Signup() {
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
           console.log("File available at", url);
           setImageUrl(url);
+          toast.success("Image uploaded successfully");
           // Now you can proceed to handleSignup() with the image URL
         }).catch((error) => {
           console.error("Error getting download URL: ", error);
         });
       }
     );
-    setIsLoading(!isLoading);
+    // setIsLoading(!isLoading);
 
   }
        
@@ -127,7 +128,7 @@ function Signup() {
   return (
     <div className='mainBody'>
       {(isLoading) ? <Loader/> : <div className='smallBody'>    
-          <div className='Heading'>Sign in</div>
+          <div className='Heading'>Sign Up</div>
           <div><input className='bar1' type="text" placeholder='Full Name' onChange={readFullName}/></div>    
           <div><input className='bar1' type="text" placeholder='Username' onChange={readuserName}/></div>
           <div><input className='bar1' type="text" placeholder='Email id' onChange={readEmailid}/></div>
